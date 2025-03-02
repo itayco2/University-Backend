@@ -28,6 +28,7 @@ namespace University_backend
             // Create object for DIs:
             builder.Services.AddDbContext<UniversityContext>();
             builder.Services.AddScoped<UserService>();
+            builder.Services.AddScoped<LessonService>();
 
 
 
