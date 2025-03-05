@@ -12,8 +12,8 @@ using University_backend;
 namespace University_backend.Migrations
 {
     [DbContext(typeof(UniversityContext))]
-    [Migration("20250301182632_SecondMigration")]
-    partial class SecondMigration
+    [Migration("20250305121930_ForthMigration")]
+    partial class ForthMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace University_backend.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("University_backend.Courses", b =>
+            modelBuilder.Entity("University_backend.Course", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,25 +33,24 @@ namespace University_backend.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("University_backend.Enrollments", b =>
+            modelBuilder.Entity("University_backend.Enrollment", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -62,8 +61,7 @@ namespace University_backend.Migrations
 
                     b.Property<DateTime>("EnrolledAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -77,7 +75,7 @@ namespace University_backend.Migrations
                     b.ToTable("Enrollments");
                 });
 
-            modelBuilder.Entity("University_backend.Lessons", b =>
+            modelBuilder.Entity("University_backend.Lesson", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -88,13 +86,13 @@ namespace University_backend.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("VideoUrl")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("Id");
 
@@ -112,9 +110,6 @@ namespace University_backend.Migrations
                     b.Property<Guid>("LessonId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("LessonsId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
@@ -125,50 +120,12 @@ namespace University_backend.Migrations
 
                     b.HasIndex("LessonId");
 
-                    b.HasIndex("LessonsId");
-
                     b.HasIndex("UserId");
 
-                    b.ToTable("ProgressRecords");
+                    b.ToTable("Progress");
                 });
 
-            modelBuilder.Entity("University_backend.Roles", b =>
-                {
-                    b.Property<int>("RoleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("RoleID");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
-
-                    b.Property<string>("RoleName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("RoleId");
-
-                    b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            RoleId = 1,
-                            RoleName = "Admin"
-                        },
-                        new
-                        {
-                            RoleId = 2,
-                            RoleName = "Student"
-                        },
-                        new
-                        {
-                            RoleId = 3,
-                            RoleName = "Instructor"
-                        });
-                });
-
-            modelBuilder.Entity("University_backend.Users", b =>
+            modelBuilder.Entity("University_backend.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -189,25 +146,20 @@ namespace University_backend.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("University_backend.Enrollments", b =>
+            modelBuilder.Entity("University_backend.Enrollment", b =>
                 {
-                    b.HasOne("University_backend.Courses", "Course")
+                    b.HasOne("University_backend.Course", "Course")
                         .WithMany("Enrollments")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("University_backend.Users", "User")
+                    b.HasOne("University_backend.User", "User")
                         .WithMany("Enrollments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -218,9 +170,9 @@ namespace University_backend.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("University_backend.Lessons", b =>
+            modelBuilder.Entity("University_backend.Lesson", b =>
                 {
-                    b.HasOne("University_backend.Courses", "Course")
+                    b.HasOne("University_backend.Course", "Course")
                         .WithMany("Lessons")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -231,17 +183,13 @@ namespace University_backend.Migrations
 
             modelBuilder.Entity("University_backend.Progress", b =>
                 {
-                    b.HasOne("University_backend.Lessons", "Lesson")
-                        .WithMany()
+                    b.HasOne("University_backend.Lesson", "Lesson")
+                        .WithMany("ProgressRecords")
                         .HasForeignKey("LessonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("University_backend.Lessons", null)
-                        .WithMany("ProgressRecords")
-                        .HasForeignKey("LessonsId");
-
-                    b.HasOne("University_backend.Users", "User")
+                    b.HasOne("University_backend.User", "User")
                         .WithMany("ProgressRecords")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -252,35 +200,19 @@ namespace University_backend.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("University_backend.Users", b =>
-                {
-                    b.HasOne("University_backend.Roles", "Role")
-                        .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("University_backend.Courses", b =>
+            modelBuilder.Entity("University_backend.Course", b =>
                 {
                     b.Navigation("Enrollments");
 
                     b.Navigation("Lessons");
                 });
 
-            modelBuilder.Entity("University_backend.Lessons", b =>
+            modelBuilder.Entity("University_backend.Lesson", b =>
                 {
                     b.Navigation("ProgressRecords");
                 });
 
-            modelBuilder.Entity("University_backend.Roles", b =>
-                {
-                    b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("University_backend.Users", b =>
+            modelBuilder.Entity("University_backend.User", b =>
                 {
                     b.Navigation("Enrollments");
 

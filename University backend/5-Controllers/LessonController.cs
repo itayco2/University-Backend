@@ -9,33 +9,49 @@ public class LessonController : ControllerBase
 {
     private readonly LessonService _lessonService;
 
-    public LessonController(LessonService lessonService)
-    {
-        _lessonService = lessonService;
-    }
+    public LessonController(LessonService lessonService) => _lessonService = lessonService;
 
     [HttpGet("api/lessons")]
-    public IActionResult GetAllLessons()
+    public async Task<IActionResult> GetAllLessons()
     {
-        List<Lessons> lessons = _lessonService.GetAllLessons();
+        List<LessonDto> lessons = await _lessonService.GetAllLessons();
         return Ok(lessons);
     }
 
     [HttpGet("api/lessons/{id}")]
-    public IActionResult GetOneLesson([FromRoute] Guid id)
+    public async Task<IActionResult> GetOneLesson([FromRoute] Guid id)
     {
-        Lessons? dbLesson = _lessonService.GetOneLesson(id);
-        if(dbLesson == null) return NotFound(new ResourceNotFound(id));
+        LessonDto? dbLesson = await _lessonService.GetOneLesson(id);
+        if (dbLesson == null) return NotFound(new ResourceNotFound(id));
         return Ok(dbLesson);
     }
 
-    //[Authorize]
     [HttpPost("api/lessons")]
-    public IActionResult AddLesson([FromForm] Lessons lesson)
+    public async Task<IActionResult> AddLesson([FromBody] LessonDto lessonDto)
     {
         if (!ModelState.IsValid) return BadRequest(new ValidationError(ModelState.GetAllErrors()));
-        Lessons dbLesson = _lessonService.AddLesson(lesson);
-        return Created("api/lessons/" + dbLesson.Id, dbLesson);
+
+        LessonDto dbLesson = await _lessonService.AddLesson(lessonDto);
+        return Created($"api/lessons/{dbLesson.Id}", dbLesson);
     }
 
+    [HttpPut("api/lessons/{id}")]
+    public async Task<IActionResult> UpdateFullLesson([FromRoute] Guid id, [FromBody] LessonDto lessonDto)
+    {
+        if (!ModelState.IsValid) return BadRequest(new ValidationError(ModelState.GetFirstError()));
+
+        lessonDto.Id = id;
+        LessonDto? dbLesson = await _lessonService.UpdateFullLesson(lessonDto);
+
+        if (dbLesson == null) return NotFound(new ResourceNotFound(id));
+        return Ok(dbLesson);
+    }
+
+    [HttpDelete("api/lessons/{id}")]
+    public async Task<IActionResult> DeleteLesson([FromRoute] Guid id)
+    {
+        bool success = await _lessonService.DeleteLesson(id);
+        if (!success) return NotFound(new ResourceNotFound(id));
+        return NoContent();
+    }
 }

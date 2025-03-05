@@ -1,58 +1,97 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace University_backend;
-
-public enum RoleType
-{
-    Admin = 1,
-    Student = 2,
-    Instructor = 3
-}
 
 public class UserService : IDisposable
 {
     private readonly UniversityContext _db;
+    private readonly IMapper _mapper;
 
-    public UserService(UniversityContext db)
+    public UserService(UniversityContext db, IMapper mapper)
     {
         _db = db;
+        _mapper = mapper;
     }
 
-    public string Register(Users user)
+    public async Task<string> Register(RegisterCredentials credentials)
     {
-        user.Email = user.Email.ToLower();
-        user.Password = Cyber.HashPassword(user.Password);
-        _db.Users.Add(user);
-        _db.SaveChanges();
-        user.Role = _db.Roles.Single(r => r.RoleId == user.RoleId); // Populate the Role navigation property.
-        return JwtHelper.GetNewToken(user); // JWT = Json Web Token
-    }
+        ValidationContext validationContext = new ValidationContext(credentials);
+        Validator.ValidateObject(credentials, validationContext, validateAllProperties: true);
 
-    public string? Login(Credentials credentials)
-    {
-        credentials.Email = credentials.Email.ToLower();
-        credentials.Password = Cyber.HashPassword(credentials.Password);
-        Users? user = _db.Users.AsNoTracking().Include(u => u.Role).SingleOrDefault(u => u.Email == credentials.Email && u.Password == credentials.Password);
-        if (user == null) return null;
+        credentials.Email = credentials.Email.ToLowerInvariant();
+
+        if (await IsEmailTaken(credentials.Email))
+        {
+            throw new InvalidOperationException("Email is already registered.");
+        }
+
+        User user = new User
+        {
+            Name = credentials.Name,  
+            Email = credentials.Email,
+            Password = Cyber.HashPassword(credentials.Password)
+        };
+
+        await _db.Users.AddAsync(user);
+        await _db.SaveChangesAsync();
+
         return JwtHelper.GetNewToken(user);
     }
 
-    public Users? GetOneUser(Guid id)
+
+
+
+
+
+
+
+    public async Task<string?> Login(Credentials credentials)
     {
-        Users? user = _db.Users.AsNoTracking().SingleOrDefault(u => u.Id == id);
-        if (user == null) return null;
-        user.Password = null!; // Remove password!
-        return user;
+        ValidationContext validationContext = new ValidationContext(credentials);
+        Validator.ValidateObject(credentials, validationContext, validateAllProperties: true);
+
+        credentials.Email = credentials.Email.ToLowerInvariant();
+        string hashedPassword = Cyber.HashPassword(credentials.Password);
+
+        User? user = await _db.Users.AsNoTracking()
+            .SingleOrDefaultAsync(u =>
+                u.Email == credentials.Email &&
+                u.Password == hashedPassword);
+
+        return user != null ? JwtHelper.GetNewToken(user) : null;
     }
 
-    public bool IsEmailTaken(string email)
+    public async Task<UserDto?> GetOneUser(Guid id)
     {
-        return _db.Users.Any(u => u.Email == email);
+        return await _db.Users
+            .AsNoTracking()
+            .Where(u => u.Id == id)
+            .ProjectTo<UserDto>(_mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync();
+    }
+
+    public async Task<bool> IsEmailTaken(string email)
+    {
+        return await _db.Users.AnyAsync(u => u.Email == email.ToLowerInvariant());
     }
 
     public void Dispose()
     {
         _db.Dispose();
+        GC.SuppressFinalize(this);
     }
 }
 
+public class UserProfile : Profile
+{
+    public UserProfile()
+    {
+        CreateMap<User, UserDto>()
+            .ForMember(dest => dest.Password, opt => opt.Ignore())
+            .ReverseMap()
+            .ForMember(dest => dest.Password, opt => opt.Ignore());
+    }
+}

@@ -13,10 +13,8 @@ public static class Extensions
     {
         string errors = "";
 
-        // Running on all failed properties (e.g: ProductName, UnitPrice, ... ): 
         foreach (KeyValuePair<string, ModelStateEntry> item in modelState)
         {
-            // Running on all failed attributes of item properties (e.g: Required, MaxLength...):
             foreach (ModelError err in item.Value.Errors)
                 errors += err.ErrorMessage + " ";
         }

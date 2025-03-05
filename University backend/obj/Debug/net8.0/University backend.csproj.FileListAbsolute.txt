@@ -357,3 +357,11 @@ C:\Users\itay7\Desktop\University\University-Backend\University backend\obj\Debu
 C:\Users\itay7\Desktop\University\University-Backend\University backend\obj\Debug\net8.0\University backend.pdb
 C:\Users\itay7\Desktop\University\University-Backend\University backend\obj\Debug\net8.0\University backend.genruntimeconfig.cache
 C:\Users\itay7\Desktop\University\University-Backend\University backend\obj\Debug\net8.0\ref\University backend.dll
+C:\Users\itay7\Desktop\Matrix\University backend\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+C:\Users\itay7\Desktop\Matrix\University backend\bin\Debug\net8.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\itay7\Desktop\Matrix\University backend\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Json.dll
+C:\Users\itay7\Desktop\Matrix\University backend\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\itay7\Desktop\Matrix\University backend\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\itay7\Desktop\Matrix\University backend\bin\Debug\net8.0\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\itay7\Desktop\Matrix\University backend\obj\Debug\net8.0\University backend.sourcelink.json
+C:\Users\itay7\Desktop\Matrix\University backend\bin\Debug\net8.0\AutoMapper.dll

@@ -1,58 +1,78 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper.QueryableExtensions;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace University_backend;
 
 public class LessonService : IDisposable
 {
-
-
     private readonly UniversityContext _db;
+    private readonly IMapper _mapper;
 
-    public LessonService(UniversityContext db)
+    public LessonService(UniversityContext db, IMapper mapper)
     {
         _db = db;
+        _mapper = mapper;
     }
 
-    public List<Lessons> GetAllLessons()
+    public async Task<List<LessonDto>> GetAllLessons()
     {
-        return _db.Lessons.AsNoTracking().ToList();
+        return await _db.Lessons
+            .AsNoTracking()
+            .ProjectTo<LessonDto>(_mapper.ConfigurationProvider)
+            .ToListAsync();
     }
 
-    public Lessons? GetOneLesson(Guid id)
+    public async Task<LessonDto?> GetOneLesson(Guid id)
     {
-        return _db.Lessons.AsNoTracking().SingleOrDefault(l => l.Id == id);
+        return await _db.Lessons
+            .AsNoTracking()
+            .Where(l => l.Id == id)
+            .ProjectTo<LessonDto>(_mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync();
     }
 
-    public Lessons AddLesson(Lessons lesson)
+    public async Task<LessonDto> AddLesson(LessonDto lessonDto)
     {
-        _db.Lessons.Add(lesson);
-        _db.SaveChanges();
-        return lesson;
+        var lesson = _mapper.Map<Lesson>(lessonDto);
+
+        // Ensure CourseId is set if not provided
+        if (lesson.CourseId == Guid.Empty && lessonDto.Course != null)
+        {
+            lesson.CourseId = lessonDto.Course.Id;
+        }
+
+        await _db.Lessons.AddAsync(lesson);
+        await _db.SaveChangesAsync();
+
+        return _mapper.Map<LessonDto>(lesson);
     }
 
-    public Lessons? UpdateFullLesson( Lessons lesson)
+    public async Task<LessonDto?> UpdateFullLesson(LessonDto lessonDto)
     {
-        Lessons? dbLesson = GetOneLesson(lesson.Id);
+        var dbLesson = await _db.Lessons.FindAsync(lessonDto.Id);
         if (dbLesson == null) return null;
-        _db.Lessons.Attach(lesson);
-        _db.Entry(lesson).State = EntityState.Modified;
-        _db.SaveChanges();
-        return lesson;
 
+        _mapper.Map(lessonDto, dbLesson);
+
+        await _db.SaveChangesAsync();
+
+        return _mapper.Map<LessonDto>(dbLesson);
     }
 
-    public bool DeleteLesson(Guid id)
+    public async Task<bool> DeleteLesson(Guid id)
     {
-        Lessons? dbLesson = GetOneLesson(id);
+        var dbLesson = await _db.Lessons.FindAsync(id);
         if (dbLesson == null) return false;
+
         _db.Lessons.Remove(dbLesson);
-        _db.SaveChanges();
+        await _db.SaveChangesAsync();
         return true;
     }
 
     public void Dispose()
     {
-         _db.Dispose();
+        _db.Dispose();
+        GC.SuppressFinalize(this);
     }
 }
-

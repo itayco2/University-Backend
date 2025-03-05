@@ -1,5 +1,114 @@
 [
   {
+    "ContainingType": "University_backend.CoursesController",
+    "Method": "GetAllCoursesAsync",
+    "RelativePath": "api/courses",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "University_backend.CoursesController",
+    "Method": "AddCourseAsync",
+    "RelativePath": "api/courses",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CreatedAt",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "University_backend.CoursesController",
+    "Method": "GetOneCourseAsync",
+    "RelativePath": "api/courses/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "University_backend.CoursesController",
+    "Method": "UpdateFullCourseAsync",
+    "RelativePath": "api/courses/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "Id",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CreatedAt",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "University_backend.CoursesController",
+    "Method": "DeleteCourseAsync",
+    "RelativePath": "api/courses/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "University_backend.LessonController",
     "Method": "GetAllLessons",
     "RelativePath": "api/lessons",
@@ -18,59 +127,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Id",
-        "Type": "System.Guid",
-        "IsRequired": false
-      },
-      {
-        "Name": "CourseId",
-        "Type": "System.Guid",
-        "IsRequired": false
-      },
-      {
-        "Name": "Title",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "VideoUrl",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Course.Id",
-        "Type": "System.Guid",
-        "IsRequired": false
-      },
-      {
-        "Name": "Course.Title",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Course.Description",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Course.CreatedAt",
-        "Type": "System.DateTime",
-        "IsRequired": false
-      },
-      {
-        "Name": "Course.Lessons",
-        "Type": "System.Collections.Generic.ICollection\u00601[[University_backend.Lessons, University backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Course.Enrollments",
-        "Type": "System.Collections.Generic.ICollection\u00601[[University_backend.Enrollments, University backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "ProgressRecords",
-        "Type": "System.Collections.Generic.ICollection\u00601[[University_backend.Progress, University backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "IsRequired": false
+        "Name": "lessonDto",
+        "Type": "University_backend.LessonDto",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -80,6 +139,43 @@
     "Method": "GetOneLesson",
     "RelativePath": "api/lessons/{id}",
     "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "University_backend.LessonController",
+    "Method": "UpdateFullLesson",
+    "RelativePath": "api/lessons/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "lessonDto",
+        "Type": "University_backend.LessonDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "University_backend.LessonController",
+    "Method": "DeleteLesson",
+    "RelativePath": "api/lessons/{id}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -116,8 +212,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "user",
-        "Type": "University_backend.Users",
+        "Name": "credentials",
+        "Type": "University_backend.RegisterCredentials",
         "IsRequired": true
       }
     ],

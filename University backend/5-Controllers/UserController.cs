@@ -9,38 +9,41 @@ public class UserController : ControllerBase, IDisposable
 {
     private readonly UserService _userService;
 
-    public UserController(UserService userService)
-    {
-        _userService = userService;
-    }
+    public UserController(UserService userService) => _userService = userService;
 
     [HttpPost("api/register")]
-    public IActionResult Register([FromBody] Users user)
+    public async Task<IActionResult> Register([FromBody] RegisterCredentials credentials)
     {
-        ModelState.Remove("Role"); // Prevent bad request for requeired Role.
         if (!ModelState.IsValid) return BadRequest(new ValidationError(ModelState.GetAllErrors()));
 
-        if (_userService.IsEmailTaken(user.Email)) return BadRequest(new ValidationError($"Email {user.Email} already taken."));
-
-        string token = _userService.Register(user);
-        return Created("", token);
+        try
+        {
+            string token = await _userService.Register(credentials);
+            return Created("", token);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(new ValidationError(ex.Message));
+        }
     }
 
     [HttpPost("api/login")]
-    public IActionResult Login([FromBody] Credentials credentials)
+    public async Task<IActionResult> Login([FromBody] Credentials credentials)
     {
         if (!ModelState.IsValid) return BadRequest(new ValidationError(ModelState.GetAllErrors()));
-        string? token = _userService.Login(credentials);
+
+        string? token = await _userService.Login(credentials);
         if (token == null) return Unauthorized(new UnauthorizedError("Incorrect email or password."));
+
         return Ok(token);
     }
 
-    [Authorize(Roles = "Admin")]
     [HttpGet("api/users/{id}")]
-    public IActionResult GetOneUser([FromRoute] Guid id)
+    public async Task<IActionResult> GetOneUser([FromRoute] Guid id)
     {
-        Users? dbUser = _userService.GetOneUser(id);
+        UserDto? dbUser = await _userService.GetOneUser(id);
         if (dbUser == null) return NotFound(new ResourceNotFound(id));
+
         return Ok(dbUser);
     }
 
@@ -48,4 +51,5 @@ public class UserController : ControllerBase, IDisposable
     {
         _userService.Dispose();
     }
+
 }

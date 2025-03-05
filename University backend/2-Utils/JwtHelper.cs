@@ -13,16 +13,15 @@ public static class JwtHelper
     private static readonly JwtSecurityTokenHandler _handler = new JwtSecurityTokenHandler();
 
     // Get a new JWT token for a given username:
-    public static string GetNewToken(Users user)
+    public static string GetNewToken(User user)
     {
         // Create JSON (without password):
-        var slimUser = new { user.Id, user.Name, user.Email, user.RoleId, Role = user.Role.RoleName };
+        var slimUser = new { user.Id, user.Name, user.Email };
         string json = JsonSerializer.Serialize(slimUser, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
 
         // Claims:
         List<Claim> claims = new List<Claim> {
             new Claim(ClaimTypes.Actor, json), // Enter user object
-            new Claim(ClaimTypes.Role, user.Role.RoleName) // Enter user role
         };
 
         // Descriptor: 

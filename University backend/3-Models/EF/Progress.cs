@@ -9,16 +9,17 @@ public class Progress
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; } = Guid.NewGuid();
 
-    [Required]
+    [Required(ErrorMessage ="Missing user id")]
     public Guid UserId { get; set; }
 
-    [Required]
+    [ForeignKey("UserId")]
+    public virtual User User { get; set; } = null!;
+
+    [Required(ErrorMessage ="Missing lessonid")]
     public Guid LessonId { get; set; }
 
-    [DataType(DataType.DateTime)]
-    public DateTime? WatchedAt { get; set; }
+    [ForeignKey("LessonId")]
+    public virtual Lesson Lesson { get; set; } = null!;
 
-    // Navigation properties
-    public Users User { get; set; }
-    public Lessons Lesson { get; set; }
+    public DateTime? WatchedAt { get; set; } 
 }

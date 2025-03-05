@@ -5,7 +5,7 @@
 namespace University_backend.Migrations
 {
     /// <inheritdoc />
-    public partial class SecondMigration : Migration
+    public partial class FithMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

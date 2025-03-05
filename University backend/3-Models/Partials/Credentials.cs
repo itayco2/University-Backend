@@ -18,3 +18,17 @@ public class Credentials
     public string Password { get; set; } = null!;
 }
 
+public class RegisterCredentials
+{
+    [Required(ErrorMessage = "The Name field is required.")]
+    [MaxLength(50)]
+    public string Name { get; set; } = null!;
+
+    [Required(ErrorMessage = "The Email field is required.")]
+    [EmailAddress]
+    public string Email { get; set; } = null!;
+
+    [Required(ErrorMessage = "The Password field is required.")]
+    [MinLength(8, ErrorMessage = "Password must be at least 8 characters long.")]
+    public string Password { get; set; } = null!;
+}
