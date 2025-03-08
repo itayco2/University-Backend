@@ -1,0 +1,18 @@
+<div class="courses-section">
+    <h2 class="section-title">Featured Courses</h2>
+    <p class="section-subtitle">Explore our most popular courses and start your learning journey today.</p>
+
+    <div class="courses-grid">
+        @for (c of courses; track c.id) {
+            <div class="course-card">
+                <div class="course-content">
+                    <h3 class="course-title">{{c.title}}</h3>
+                    <p class="course-description">{{c.description}}</p>
+                    <span class="course-date">{{c.createdAt | date}}</span>
+                </div>
+                <button class="enroll-btn" (click)="enroll(c.title)">Enroll Now</button>
+            </div>
+        }
+    </div>
+
+</div>

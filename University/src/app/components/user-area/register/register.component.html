@@ -1,0 +1,29 @@
+<div>
+    <form [formGroup]="userForm" (submit)="send()">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Name: </mat-label>
+            <input type="text" matInput formControlName="NameControl">
+        </mat-form-field>
+       
+       
+
+        <mat-form-field appearance="outline">
+            <mat-label>Email: </mat-label>
+            <input type="email" matInput formControlName="emailControl">
+        </mat-form-field>
+       
+
+        <mat-form-field appearance="outline">
+            <mat-label>Password: </mat-label>
+            <input type="password" matInput formControlName="passwordControl">
+        </mat-form-field>
+       
+
+
+        <div class="button-container">
+            <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">Send</button>
+            <button mat-raised-button color="secondary" type="reset" >Clear</button>
+        </div>
+    </form>
+</div>

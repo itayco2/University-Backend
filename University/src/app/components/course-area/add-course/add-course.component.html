@@ -1,0 +1,23 @@
+<div>
+
+
+    <form [formGroup]="courseForm" (submit)="send()">
+
+        <label>Title: </label>
+        <input type="text" formControlName="titleControl">
+        <span *ngIf="courseForm.controls['titleControl'].errors?.['required'] && courseForm.controls['titleControl'].touched">Missing name.</span>
+        <span *ngIf="courseForm.controls['titleControl'].errors?.['minlength'] && courseForm.controls['titleControl'].touched">Name too short.</span>
+        <span *ngIf="courseForm.controls['titleControl'].errors?.['maxlength'] && courseForm.controls['titleControl'].touched">Name too long.</span>
+
+        <label>Description: </label>
+        <textarea formControlName="descriptionControl"></textarea>
+        <span *ngIf="courseForm.controls['descriptionControl'].errors?.['required'] && courseForm.controls['descriptionControl'].touched">Missing Description.</span>
+        <span *ngIf="courseForm.controls['descriptionControl'].errors?.['minlength'] && courseForm.controls['descriptionControl'].touched">Description is too short.</span>
+        <span *ngIf="courseForm.controls['descriptionControl'].errors?.['maxlength'] && courseForm.controls['descriptionControl'].touched">Description can't exceed 1000.</span>
+
+     
+        <button [disabled]="courseForm.invalid">Add</button>
+
+    </form>
+
+</div>

@@ -1,0 +1,9 @@
+span {
+    color: red;
+    position: absolute;
+    margin-left: 30px;
+    font-family: Arial;
+}
+textarea{
+    height: 300px;
+}
