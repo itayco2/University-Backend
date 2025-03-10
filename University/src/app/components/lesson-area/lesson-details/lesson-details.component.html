@@ -1,0 +1,17 @@
+<div *ngIf="lesson">
+
+    <h3>Name: {{lesson.title}}</h3>
+    
+    <h3>Price: {{lesson.videoUrl}}</h3>
+
+    <a routerLink="/lessons">Back</a>
+    
+    <span> | </span>
+    
+    <!-- <a routerLink="/products/edit/{{product.id}}">Edit</a> -->
+    
+    <span> | </span>
+
+    <a href="javascript:void(0)" (click)="deleteMe(lesson.id)">Delete</a>
+    
+</div>

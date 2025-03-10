@@ -11,6 +11,12 @@
                     <span class="course-date">{{c.createdAt | date}}</span>
                 </div>
                 <button class="enroll-btn" (click)="enroll(c.title)">Enroll Now</button>
+                <button class="lesson-btn" 
+                [routerLink]="['/lessons', c.id]" 
+                routerLinkActive="active" 
+                [routerLinkActiveOptions]="{ exact: true }">
+            View Course
+        </button>
             </div>
         }
     </div>

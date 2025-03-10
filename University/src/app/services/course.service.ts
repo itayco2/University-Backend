@@ -17,7 +17,7 @@ export class CourseService {
     if(this.courseStore.count()) return this.courseStore.courses();
     const dbCourse$ = this.http.get<CourseModel[]>(environment.courseUrl);
     const dbCourse = await firstValueFrom(dbCourse$);
-    this.courseStore.initProducts(dbCourse);
+    this.courseStore.initCourse(dbCourse);
     return dbCourse;
   }
 

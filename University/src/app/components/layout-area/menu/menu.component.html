@@ -1,14 +1,17 @@
-<nav>
-    <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Home</a>
+<nav class="navigation-menu">
+    <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link"> 
+        <span class="nav-text">Home</span>
+    </a>
 
-    <a routerLink="/courses" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Courses</a>
+    <a routerLink="/courses" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link"> 
+        <span class="nav-text">Courses</span>
+    </a>
 
-    <a routerLink="/course/new" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Add Course</a>
+    <a routerLink="/course/new" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
+        <span class="nav-text">Add Course</span>
+    </a>
 
-
-
-
-
-    <a routerLink="/contact-us" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Contact us</a>
-
+    <a routerLink="/contact-us" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link"> 
+        <span class="nav-text">Contact us</span>
+    </a>
 </nav>

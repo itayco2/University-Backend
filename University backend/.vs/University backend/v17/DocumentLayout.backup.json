@@ -1,22 +1,30 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\",
+  "WorkspaceRootPath": "C:\\Users\\itay7\\Desktop\\University\\University backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|c:\\users\\itay7\\desktop\\matrix\\university backend\\5-controllers\\progresscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|solutionrelative:5-controllers\\progresscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|c:\\users\\itay7\\desktop\\university\\university backend\\4-services\\lessonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|solutionrelative:4-services\\lessonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|c:\\users\\itay7\\desktop\\matrix\\university backend\\4-services\\progressservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|c:\\users\\itay7\\desktop\\university\\university backend\\4-services\\progressservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|solutionrelative:4-services\\progressservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|c:\\users\\itay7\\desktop\\matrix\\university backend\\5-controllers\\lessoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|solutionrelative:5-controllers\\lessoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|c:\\users\\itay7\\desktop\\university\\university backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|c:\\users\\itay7\\desktop\\matrix\\university backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|c:\\users\\itay7\\desktop\\university\\university backend\\3-models\\dtos\\progressdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|solutionrelative:3-models\\dtos\\progressdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|c:\\users\\itay7\\desktop\\university\\university backend\\5-controllers\\progresscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|solutionrelative:5-controllers\\progresscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|c:\\users\\itay7\\desktop\\university\\university backend\\5-controllers\\lessoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|solutionrelative:5-controllers\\lessoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,64 +34,85 @@
       "DocumentGroups": [
         {
           "DockedWidth": 165,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\itay7\\Desktop\\University\\University backend\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\Program.cs",
+              "ToolTip": "C:\\Users\\itay7\\Desktop\\University\\University backend\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAAAAAAAAAAAuwDIAAABWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-09T17:30:07.115Z",
-              "IsPinned": true,
+              "IsPinned": true
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LessonService.cs",
+              "DocumentMoniker": "C:\\Users\\itay7\\Desktop\\University\\University backend\\4-Services\\LessonService.cs",
+              "RelativeDocumentMoniker": "4-Services\\LessonService.cs",
+              "ToolTip": "C:\\Users\\itay7\\Desktop\\University\\University backend\\4-Services\\LessonService.cs",
+              "RelativeToolTip": "4-Services\\LessonService.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-10T08:10:01.263Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProgressDto.cs",
+              "DocumentMoniker": "C:\\Users\\itay7\\Desktop\\University\\University backend\\3-Models\\Dtos\\ProgressDto.cs",
+              "RelativeDocumentMoniker": "3-Models\\Dtos\\ProgressDto.cs",
+              "ToolTip": "C:\\Users\\itay7\\Desktop\\University\\University backend\\3-Models\\Dtos\\ProgressDto.cs",
+              "RelativeToolTip": "3-Models\\Dtos\\ProgressDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-09T20:42:18.36Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "ProgressService.cs",
-              "DocumentMoniker": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\4-Services\\ProgressService.cs",
+              "DocumentMoniker": "C:\\Users\\itay7\\Desktop\\University\\University backend\\4-Services\\ProgressService.cs",
               "RelativeDocumentMoniker": "4-Services\\ProgressService.cs",
-              "ToolTip": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\4-Services\\ProgressService.cs",
+              "ToolTip": "C:\\Users\\itay7\\Desktop\\University\\University backend\\4-Services\\ProgressService.cs",
               "RelativeToolTip": "4-Services\\ProgressService.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAAADgAAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-09T20:33:22.093Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-09T20:33:22.093Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "LessonController.cs",
-              "DocumentMoniker": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\5-Controllers\\LessonController.cs",
+              "DocumentMoniker": "C:\\Users\\itay7\\Desktop\\University\\University backend\\5-Controllers\\LessonController.cs",
               "RelativeDocumentMoniker": "5-Controllers\\LessonController.cs",
-              "ToolTip": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\5-Controllers\\LessonController.cs",
+              "ToolTip": "C:\\Users\\itay7\\Desktop\\University\\University backend\\5-Controllers\\LessonController.cs",
               "RelativeToolTip": "5-Controllers\\LessonController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-09T20:30:42.262Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-09T20:30:42.262Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "ProgressController.cs",
-              "DocumentMoniker": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\5-Controllers\\ProgressController.cs",
+              "DocumentMoniker": "C:\\Users\\itay7\\Desktop\\University\\University backend\\5-Controllers\\ProgressController.cs",
               "RelativeDocumentMoniker": "5-Controllers\\ProgressController.cs",
-              "ToolTip": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\5-Controllers\\ProgressController.cs*",
-              "RelativeToolTip": "5-Controllers\\ProgressController.cs*",
+              "ToolTip": "C:\\Users\\itay7\\Desktop\\University\\University backend\\5-Controllers\\ProgressController.cs",
+              "RelativeToolTip": "5-Controllers\\ProgressController.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAswDcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-09T19:53:47.978Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+              "WhenOpened": "2025-03-09T19:53:47.978Z"
             }
           ]
         }

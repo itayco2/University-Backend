@@ -19,7 +19,7 @@ export const CourseStore = signalStore(
 
     withMethods(store => ({
 
-        initProducts(courses: CourseModel[]): void {
+        initCourse(courses: CourseModel[]): void {
             patchState(store, _currentState => ({ courses })); 
         },
 
@@ -44,7 +44,7 @@ export const CourseStore = signalStore(
     })),
 
     // Adding reports to debug tool: 
-    environment.isDevelopment && withDevtools("ProductStore") 
+    environment.isDevelopment && withDevtools("CourseStore") 
 
 
     

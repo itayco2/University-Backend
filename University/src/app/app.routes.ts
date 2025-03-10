@@ -5,6 +5,7 @@ import { Page404Component } from './components/page-area/page-404/page-404.compo
 import { CourseListComponent } from './components/course-area/course-list/course-list.component';
 import { AddCourseComponent } from './components/course-area/add-course/add-course.component';
 import { authGuard } from './services/auth.guard';
+import { LessonListComponent } from './components/lesson-area/lesson-list/lesson-list.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "/home", pathMatch:"full" },
@@ -12,6 +13,7 @@ export const routes: Routes = [
     { path: "contact-us", component: ContactUsComponent},
     { path: "courses", component: CourseListComponent},
     { path: "course/new", component: AddCourseComponent},
+    { path: "lessons/:id", component: LessonListComponent},
     { path: "register", loadComponent: () => import("./components/user-area/register/register.component").then(m => m.RegisterComponent) }, 
     { path: "login", loadComponent: () => import("./components/user-area/login/login.component").then(m => m.LoginComponent) }, 
 

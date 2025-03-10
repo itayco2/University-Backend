@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { CourseModel } from '../../../models/course.model';
 import { CourseService } from '../../../services/course.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { NotifyService } from '../../../services/notify.service';
 
 @Component({
   selector: 'app-course-list',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './course-list.component.html',
   styleUrl: './course-list.component.css'
 })

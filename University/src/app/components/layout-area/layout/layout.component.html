@@ -1,19 +1,15 @@
-<div>
-
-    <header>
-        <app-header/>
+<div class="app-container">
+    <header class="app-header">
+      <app-header/>
     </header>
 
-    <aside>
-        <app-menu />
-    </aside>
+    <div class="content-wrapper">
+        <main class="app-main">
+            <router-outlet />
+        </main>
+    </div>
 
-    <main>
-        <router-outlet />
-    </main>
-
-    <footer>
+    <footer class="app-footer">
         <app-footer />
     </footer>
-
 </div>
