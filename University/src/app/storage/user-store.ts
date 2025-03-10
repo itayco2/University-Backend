@@ -4,31 +4,38 @@ import { computed } from "@angular/core";
 import { withDevtools } from "@angular-architects/ngrx-toolkit";
 import { environment } from "../../environments/environment";
 
-export type UserState={
-    user:UserModel;
+export type UserState = {
+    user: UserModel | null;
 };
 
-const initialState: UserState ={
-    user:null
+const initialState: UserState = {
+    user: null
 };
 
 export const UserStore = signalStore(
-    {providedIn:"root"},
+    { providedIn: "root" },
     withState(initialState),
-    withMethods(store =>({
-        initUser(user:UserModel):void{
-            patchState(store, _currentState => ({user}));
+    withMethods(store => ({
+        initUser(user: UserModel): void {
+            try {
+                patchState(store, _currentState => ({ user: user as UserModel }));
+            } catch (error) {
+                console.error("Failed to initialize user:", error);
+            }
         },
 
-        logoutUser():void{ //Logout user.
-            patchState(store, _currentState => ({user : null as UserModel}));
+        logoutUser(): void {
+            try {
+                patchState(store, _currentState => ({ user: null as UserModel }));
+            } catch (error) {
+                console.error("Failed to logout user:", error);
+            }
         }
     })),
 
     withComputed(store => ({
         fullname: computed(() => `${store.user()?.name}`)
     })),
-    
-        // Adding reports to debug tool: 
-       environment.isDevelopment && withDevtools("UserStore")
+
+    environment.isDevelopment && withDevtools("UserStore")
 );

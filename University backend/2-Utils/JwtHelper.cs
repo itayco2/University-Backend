@@ -2,61 +2,58 @@
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text.Json;
 using System.Text;
+using System.Text.Json;
+using University_backend;
 
 namespace University_backend;
 
 public static class JwtHelper
 {
-    private static readonly SymmetricSecurityKey _symmetricSecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(AppConfig.JwtKey));
     private static readonly JwtSecurityTokenHandler _handler = new JwtSecurityTokenHandler();
+    private static readonly SymmetricSecurityKey _symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AppConfig.JwtKey)); // Must be minimum 16 char string.
 
-    // Get a new JWT token for a given user:
+    // Get a new JWT token for a given username:
     public static string GetNewToken(User user)
     {
-        if (user == null)
+        var userObject = new Dictionary<string, object>
         {
-            throw new ArgumentNullException(nameof(user), "User cannot be null.");
-        }
-
-        if (user.Role == null)
-        {
-            throw new ArgumentNullException(nameof(user.Role), "User's Role cannot be null.");
-        }
-
-        // Create a simplified user object (without password) for the JWT payload:
-        var slimUser = new { user.Id, user.Name, user.Email, user.RoleId, Role = user.Role.RoleName };
-        string json = JsonSerializer.Serialize(slimUser, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-
-        // Claims:
-        List<Claim> claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Actor, json), // Enter user object
-            new Claim(ClaimTypes.Role, user.Role.RoleName) // Enter user role
+            { "id", user.Id.ToString() },
+            { "name", user.Name },
+            { "email", user.Email },
+            { "role", user.Role.RoleName }
         };
 
-        // Security token descriptor:
+        // Claims:
+        List<Claim> claims = new List<Claim> {
+            new Claim(ClaimTypes.Role, user.Role.RoleName)
+        };
+
+        // Descriptor: 
         SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.AddHours(AppConfig.JwtExpireHours), // Set expiration based on the app's configuration
-            SigningCredentials = new SigningCredentials(_symmetricSecurityKey, SecurityAlgorithms.HmacSha512)
+            Expires = DateTime.UtcNow.AddHours(AppConfig.JwtExpireHours),
+            SigningCredentials = new SigningCredentials(_symmetricSecurityKey, SecurityAlgorithms.HmacSha512),
+            Claims = new Dictionary<string, object>
+            {
+                { "user", userObject }
+            }
         };
 
-        // Create and return the JWT token:
+        // Return token: 
         SecurityToken securityToken = _handler.CreateToken(descriptor);
         string token = _handler.WriteToken(securityToken);
         return token;
     }
 
-    // Set default bearer options for validating the JWT token:
+    // Set default bearer options: 
     public static void SetBearerOptions(JwtBearerOptions options)
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = false, // We didn't set an Issuer claim (which server/microservice issued the token), so don't validate it.
-            ValidateAudience = false, // We didn't set an Audience claim (which server our audience should browse to), so don't validate it.
+            ValidateIssuer = false, // We didn't set an Issuer claim (which server/microservice issue the token), so don't validate it (otherwise validation failed).
+            ValidateAudience = false, // We didn't set an Audience claim (which server our audience browse to), so don't validate it (otherwise validation failed).
             ValidateIssuerSigningKey = true, // Validate the secret key.
             IssuerSigningKey = _symmetricSecurityKey // The secret key to validate.
         };

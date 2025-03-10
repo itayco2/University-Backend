@@ -779,29 +779,6 @@
         },
         "additionalProperties": false
       },
-      "Role": {
-        "type": "object",
-        "properties": {
-          "roleId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "roleName": {
-            "maxLength": 20,
-            "minLength": 0,
-            "type": "string",
-            "nullable": true
-          },
-          "users": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/User"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "User": {
         "required": [
           "email",
@@ -833,9 +810,6 @@
           "roleId": {
             "type": "integer",
             "format": "int32"
-          },
-          "role": {
-            "$ref": "#/components/schemas/Role"
           },
           "enrollments": {
             "type": "array",

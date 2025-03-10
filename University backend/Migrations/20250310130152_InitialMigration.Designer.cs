@@ -12,8 +12,8 @@ using University_backend;
 namespace University_backend.Migrations
 {
     [DbContext(typeof(UniversityContext))]
-    [Migration("20250302190157_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250310130152_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -125,7 +125,43 @@ namespace University_backend.Migrations
                     b.ToTable("Progress");
                 });
 
-            modelBuilder.Entity("University_backend.User", b =>
+            modelBuilder.Entity("University_backend.Role", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("RoleID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
+
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 1,
+                            RoleName = "Student"
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            RoleName = "Professor"
+                        },
+                        new
+                        {
+                            RoleId = 3,
+                            RoleName = "Admin"
+                        });
+                });
+
+            modelBuilder.Entity("User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -146,7 +182,13 @@ namespace University_backend.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int")
+                        .HasColumnName("RoleID");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
                 });
@@ -159,7 +201,7 @@ namespace University_backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("University_backend.User", "User")
+                    b.HasOne("User", "User")
                         .WithMany("Enrollments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -189,7 +231,7 @@ namespace University_backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("University_backend.User", "User")
+                    b.HasOne("User", "User")
                         .WithMany("ProgressRecords")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -198,6 +240,17 @@ namespace University_backend.Migrations
                     b.Navigation("Lesson");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("User", b =>
+                {
+                    b.HasOne("University_backend.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("University_backend.Course", b =>
@@ -212,7 +265,12 @@ namespace University_backend.Migrations
                     b.Navigation("ProgressRecords");
                 });
 
-            modelBuilder.Entity("University_backend.User", b =>
+            modelBuilder.Entity("University_backend.Role", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("User", b =>
                 {
                     b.Navigation("Enrollments");
 

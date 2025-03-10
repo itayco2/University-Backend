@@ -3,7 +3,7 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Name: </mat-label>
-            <input type="text" matInput formControlName="NameControl">
+            <input type="text" matInput formControlName="nameControl">
         </mat-form-field>
        
        
@@ -19,12 +19,19 @@
             <input type="password" matInput formControlName="passwordControl">
 
         </mat-form-field>
-       
 
+        <mat-form-field appearance="outline">
+            <mat-label>Role: </mat-label>
+            <mat-select formControlName="roleControl">
+                <mat-option [value]="1">Student</mat-option>
+                <mat-option [value]="2">Professor</mat-option>
+            </mat-select>
+        </mat-form-field>
 
         <div class="button-container">
             <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">Send</button>
             <button mat-raised-button color="secondary" type="reset" >Clear</button>
         </div>
+
     </form>
 </div>

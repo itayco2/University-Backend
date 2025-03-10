@@ -5,7 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 import { UserModel } from '../models/user.model';
 import { environment } from '../../environments/environment';
 import { firstValueFrom } from 'rxjs';
-import { CredentialsModel } from '../models/credentials.model';
+import { CredentialsLoginModel, CredentialsModel } from '../models/credentials.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,63 +15,38 @@ export class UserService {
     private http = inject(HttpClient);
     private userStore = inject(UserStore);
 
-    public constructor(){
+    public constructor() {
         const token = localStorage.getItem("token");
         if(!token) return;
-        const payload = jwtDecode<{user: UserModel}>(token);
+        const payload = jwtDecode<{ user: UserModel }>(token);
         const dbUser = payload.user;
         this.userStore.initUser(dbUser);
     }
-    public async register(user: UserModel): Promise<void>{
-        //Creating observable
-        const token$ = this.http.post<string>(environment.registerUrl,user);
 
-        //Getting the token
+    public async register(user: UserModel): Promise<void> {
+        const token$ = this.http.post<string>(environment.registerUrl, user,{responseType: 'text' as 'json'});
         const token = await firstValueFrom(token$);
-
-        //Reading the token and converting him to user
-        const payload = jwtDecode<{user: UserModel}>(token);
-
-        //Put the user into a const
+        const payload = jwtDecode<{ user: UserModel }>(token);
         const dbUser = payload.user;
-
-        //Sending the user to the initUser
         this.userStore.initUser(dbUser);
 
-        //Saving the token in the local storage
-        localStorage.setItem("token",token);
-        
+        localStorage.setItem("token", token);
     }
 
-    public async login(credentials: CredentialsModel): Promise<void>{
-        //Creating observable
-        const token$ = this.http.post<string>(environment.loginUrl,credentials);
-
-        //Getting the token
+    public async login(credentials: CredentialsLoginModel): Promise<void> {
+        const token$ = this.http.post<string>(environment.loginUrl, credentials,{responseType: 'text' as 'json'});
         const token = await firstValueFrom(token$);
-
-        //Reading the token and converting him to user
-        const payload = jwtDecode<{user: UserModel}>(token);
-
-        //Put the user into a const
+        const payload = jwtDecode<{ user: UserModel }>(token);
         const dbUser = payload.user;
-
-        //Sending the user to the initUser
         this.userStore.initUser(dbUser);
-
-
-        //Saving the token in the local storage
-        localStorage.setItem("token",token);
-
+        localStorage.setItem("token", token);
     }
 
-    //Logout
-    public logout(): void{
+    public logout(): void {
         this.userStore.logoutUser();
-
-        //Removing the token in the local storage
         localStorage.removeItem("token");
     }
+
 }
 
 

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using University_backend;
+using System.Text.Json.Serialization;
 
 public class User
 {
@@ -25,8 +26,8 @@ public class User
     [Column("RoleID")]
     public int RoleId { get; set; }
 
-    [ForeignKey("RoleId")]
     [InverseProperty("Users")]
+    [JsonIgnore]
     public virtual Role Role { get; set; } = null!;
 
 
