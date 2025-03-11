@@ -6,6 +6,7 @@ import { UserModel } from '../models/user.model';
 import { environment } from '../../environments/environment';
 import { firstValueFrom } from 'rxjs';
 import { CredentialsLoginModel, CredentialsModel } from '../models/credentials.model';
+import { ProgressStore } from '../storage/progress-store';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class UserService {
 
     private http = inject(HttpClient);
     private userStore = inject(UserStore);
+    private progressStore = inject(ProgressStore);
 
     public constructor() {
         const token = localStorage.getItem("token");
@@ -44,6 +46,7 @@ export class UserService {
 
     public logout(): void {
         this.userStore.logoutUser();
+        this.progressStore.clearProgress();
         localStorage.removeItem("token");
     }
 

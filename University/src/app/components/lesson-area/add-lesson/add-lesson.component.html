@@ -1,0 +1,23 @@
+<div>
+
+
+    <form [formGroup]="lessonForm" (submit)="send()">
+
+        <label>Title: </label>
+        <input type="text" formControlName="titleControl">
+        <span *ngIf="lessonForm.controls['titleControl'].errors?.['required'] && lessonForm.controls['titleControl'].touched">Missing title.</span>
+        <span *ngIf="lessonForm.controls['titleControl'].errors?.['minlength'] && lessonForm.controls['titleControl'].touched">Title too short.</span>
+        <span *ngIf="lessonForm.controls['titleControl'].errors?.['maxlength'] && lessonForm.controls['titleControl'].touched">Title too long.</span>
+
+        <label>Video Url: </label>
+        <textarea formControlName="videoUrlControl"></textarea>
+        <span *ngIf="lessonForm.controls['videoUrlControl'].errors?.['required'] && lessonForm.controls['videoUrlControl'].touched">Missing Video Url.</span>
+        <span *ngIf="lessonForm.controls['videoUrlControl'].errors?.['minlength'] && lessonForm.controls['videoUrlControl'].touched">Video Url is too short.</span>
+        <span *ngIf="lessonForm.controls['videoUrlControl'].errors?.['maxlength'] && lessonForm.controls['videoUrlControl'].touched">Video Url can't exceed 1000.</span>
+
+     
+        <button [disabled]="lessonForm.invalid">Add</button>
+
+    </form>
+
+</div>

@@ -1,0 +1,25 @@
+<div *ngIf="courses.length > 0; else loading">
+    <h2>Your Progress</h2>
+    <div *ngFor="let course of courses">
+      <div>
+        <h3>{{ course.title }}</h3>
+        <p>{{ course.description }}</p>
+  
+        <!-- Display progress -->
+        <p *ngIf="getCourseProgress(course.id) === 'Not completed yet'" class="incomplete">
+          Not completed yet
+        </p>
+        <p *ngIf="getCourseProgress(course.id) !== 'Not completed yet'" class="completed">
+          {{ getCourseProgress(course.id) }}
+        </p>
+            <button class="lesson-btn" [routerLink]="['/course-details/', course.id , 'lessons']" 
+            routerLinkActive="active" 
+            [routerLinkActiveOptions]="{ exact: true }">view Lessons</button>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #loading>
+    <p>Loading courses...</p>
+  </ng-template>
+  

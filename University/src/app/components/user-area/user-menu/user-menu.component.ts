@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { UserStore } from '../../../storage/user-store';
 import { UserService } from '../../../services/user.service';
 import { NotifyService } from '../../../services/notify.service';
@@ -15,10 +15,19 @@ export class UserMenuComponent {
     public userStore = inject(UserStore);
     public userService = inject(UserService);
     public notifyService = inject(NotifyService);
+    public router = inject(Router);
 
 
-    public logMeOut() : void{
+    public logMeOut(): void {
+        localStorage.clear();
+        
+        sessionStorage.clear();
+        
         this.userService.logout();
-        this.notifyService.success("Bye bye");
+        
+        this.notifyService.success("Have a nice day!");
+        
+        this.router.navigate(['/home']);
     }
+    
 }

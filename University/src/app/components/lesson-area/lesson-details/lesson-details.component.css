@@ -1,0 +1,55 @@
+/* Style for the buttons container */
+.video-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  /* Common button styles */
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px 0;
+  }
+  
+  /* Mark as Watched Button */
+  .mark-watched-btn {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    font-weight: bold;
+  }
+  
+  .mark-watched-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .mark-watched-btn:focus {
+    outline: none;
+  }
+  
+  /* Delete Lesson Button */
+  .delete-lesson-btn {
+    background-color: #f44336; /* Red */
+    color: white;
+    font-weight: bold;
+  }
+  
+  .delete-lesson-btn:hover {
+    background-color: #d32f2f;
+  }
+  
+  .delete-lesson-btn:focus {
+    outline: none;
+  }
+  
+  /* Optional: Additional hover/focus styles */
+  button:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+  }
+  

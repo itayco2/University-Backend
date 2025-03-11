@@ -12,7 +12,7 @@ public class LessonProfile : Profile
             .ForMember(dest => dest.CourseId,
                 opt => opt.MapFrom(src => src.CourseId != Guid.Empty ? src.CourseId : Guid.Empty))
             .ForMember(dest => dest.Course,
-                opt => opt.MapFrom(src => src.Course)) // Direct mapping for navigation property
+                opt => opt.MapFrom(src => src.Course))
             .ReverseMap()
             .ForMember(dest => dest.Id,
                 opt => opt.MapFrom(src => src.Id != Guid.Empty ? src.Id : Guid.NewGuid()));

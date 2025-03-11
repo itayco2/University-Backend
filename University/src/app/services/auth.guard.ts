@@ -1,24 +1,43 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { CanActivateFn, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { NotifyService } from './notify.service';
+import * as jwt_decode from 'jwt-decode';
 
+export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state) => {
+  const token = localStorage.getItem('token');
 
-export const authGuard: CanActivateFn = (route, state) => {
+  if (token) {
+    try {
+      const decodedToken: any = jwt_decode(token); 
+      const userRole = decodedToken.role; 
 
- //Take token:
- const token = localStorage.getItem("token");
-  
- //If three is a token:
-if(token) return true;
+      const requiredRoles = route.data['roles'];
 
-//DI
-const notifyService = inject(NotifyService);
-const router = inject(Router);
+      if (requiredRoles && !requiredRoles.includes(userRole)) {
+        const notifyService = inject(NotifyService);
+        const router = inject(Router);
 
-//Error
-notifyService.error("You are not logged-in");
-router.navigateByUrl("/login");
+        notifyService.error('You do not have permission to access this page.');
+        router.navigateByUrl('/home');
 
-return false;
+        return false;
+      }
 
+      return true;
+    } catch (error) {
+      const notifyService = inject(NotifyService);
+      const router = inject(Router);
+
+      notifyService.error('Error decoding the token');
+      router.navigateByUrl('/login');
+      return false;
+    }
+  }
+
+  const notifyService = inject(NotifyService);
+  const router = inject(Router);
+
+  notifyService.error('You are not logged in.');
+  router.navigateByUrl('/login');
+  return false;
 };

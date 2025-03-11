@@ -3,22 +3,32 @@
     <p class="section-subtitle">Explore our most popular courses and start your learning journey today.</p>
 
     <div class="courses-grid">
-        @for (c of courses; track c.id) {
-            <div class="course-card">
-                <div class="course-content">
-                    <h3 class="course-title">{{c.title}}</h3>
-                    <p class="course-description">{{c.description}}</p>
-                    <span class="course-date">{{c.createdAt | date}}</span>
-                </div>
-                <button class="enroll-btn" (click)="enroll(c.title)">Enroll Now</button>
-                <button class="lesson-btn" 
-                [routerLink]="['/lessons', c.id]" 
-                routerLinkActive="active" 
-                [routerLinkActiveOptions]="{ exact: true }">
-            View Course
-        </button>
+        <div class="course-card" *ngFor="let course of courses">
+            <div class="course-content">
+                <h3 class="course-title">{{ course.title }}</h3>
+                <p class="course-description">{{ course.description }}</p>
+                <span class="course-date">{{ course.createdAt | date }}</span>
             </div>
-        }
-    </div>
+            
+            <button *ngIf="!isEnrolled(course)" class="enroll-btn" (click)="enroll(course)">
+                Enroll Now
+            </button>
+            <button *ngIf="isEnrolled(course)" class="enrolled-btn" disabled>
+                Already Enrolled
+            </button>
 
+            <button class="lesson-btn" 
+                    [routerLink]="['/course-details/', course.id , 'lessons']" 
+                    routerLinkActive="active" 
+                    [routerLinkActiveOptions]="{ exact: true }">
+                View Lessons
+            </button>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a routerLink="/course/new" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
+        <span class="nav-text">Add Course</span>
+    </a>
 </div>

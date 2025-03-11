@@ -2,6 +2,8 @@
     @if (userStore.user()) {
         <span>Hello {{userStore.fullname()}} | </span>
         <a routerLink="/home" (click)="logMeOut()">Logout</a>
+        <span> | </span>
+        <a [routerLink]="['/progress', userStore.user().id]">View My Progress</a>
     }
     @else {
         <span>Hello Guest | </span>

@@ -1,6 +1,7 @@
 <div class="courses-section">
     <h2 class="section-title">Featured Lessons</h2>
 
+
     <div class="courses-grid">
         @for (l of lessons; track l.id) {
             <div class="lesson-card">
@@ -9,13 +10,12 @@
                     <p class="lesson-description">{{l.videoUrl}}</p>
                 </div>
                 <button class="lesson-btn" 
-                [routerLink]="['/lessons', l.id]" 
-                routerLinkActive="active" 
-                [routerLinkActiveOptions]="{ exact: true }">
-            View Lesson
-        </button>
+                        [routerLink]="['/lessons', l.id]" 
+                        routerLinkActive="active" 
+                        [routerLinkActiveOptions]="{ exact: true }">
+                    View Lesson
+                </button>
             </div>
         }
     </div>
-
 </div>

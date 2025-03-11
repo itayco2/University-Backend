@@ -74,6 +74,18 @@
     transition: background 0.2s;
 }
 
+.enrolled-btn {
+    width: 20%;
+    margin-top: 15px;
+    padding: 10px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+
 /* Enroll Button */
 .lesson-btn {
     width: 20%;
@@ -92,4 +104,26 @@
 
 .enroll-btn:hover {
     background: #059669;
+}
+.add-course-container {
+    position: absolute;
+    bottom: 20px; /* Distance from the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.nav-link {
+    padding: 12px 20px;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    border-radius: 8px;
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #0056b3;
 }

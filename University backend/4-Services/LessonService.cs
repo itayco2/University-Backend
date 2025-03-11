@@ -32,11 +32,24 @@ public class LessonService : IDisposable
             .FirstOrDefaultAsync();
     }
 
+    public async Task<List<LessonDto>> GetLessonsForCourse(Guid courseId)
+    {
+        return await _db.Lessons
+            .AsNoTracking()
+            .Where(l => l.CourseId == courseId)
+            .ProjectTo<LessonDto>(_mapper.ConfigurationProvider)
+            .ToListAsync();
+    }
+
     public async Task<LessonDto> AddLesson(LessonDto lessonDto)
     {
         var lesson = _mapper.Map<Lesson>(lessonDto);
 
-        // Ensure CourseId is set if not provided
+        if (lesson.Id == Guid.Empty)
+        {
+            lesson.Id = Guid.NewGuid();
+        }
+
         if (lesson.CourseId == Guid.Empty && lessonDto.Course != null)
         {
             lesson.CourseId = lessonDto.Course.Id;

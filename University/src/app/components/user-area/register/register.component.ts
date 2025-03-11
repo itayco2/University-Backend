@@ -33,25 +33,37 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit(): void {
        this.userForm = this.formBuilder.group({
-        nameControl: new FormControl("", [Validators.required]),
-        emailControl: new FormControl("", [Validators.required, Validators.email]),
-        passwordControl: new FormControl("", [Validators.required, Validators.minLength(6)]),
+        nameControl: new FormControl("", [Validators.required, Validators.maxLength(50), Validators.minLength(2)]),
+        emailControl: new FormControl("", [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(100),
+            Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')
+        ]),
+        passwordControl: new FormControl("", [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.maxLength(100),
+            Validators.pattern('^(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$')
+        ]),
         roleControl: new FormControl("", [Validators.required])
        });
     }
 
     public async send(){
-        try{
-            this.user.name = this.userForm.get("nameControl").value;
-            this.user.email = this.userForm.get("emailControl").value;
-            this.user.password = this.userForm.get("passwordControl").value;
-            this.user.roleId = this.userForm.get("roleControl").value;                        
-            await this.userService.register(this.user);
-            this.notifyService.success(`Welcome ${this.user.name}`);
-            this.router.navigateByUrl("/home");
-        }
-        catch(err : any){
-            this.notifyService.error(err);
+        if (this.userForm.valid) {
+            try{
+                this.user.name = this.userForm.get("nameControl").value;
+                this.user.email = this.userForm.get("emailControl").value;
+                this.user.password = this.userForm.get("passwordControl").value;
+                this.user.roleId = this.userForm.get("roleControl").value;                        
+                await this.userService.register(this.user);
+                this.notifyService.success(`Welcome ${this.user.name}`);
+                this.router.navigateByUrl("/home");
+            }
+            catch(err : any){
+                this.notifyService.error(err);
+            }
         }
     }
 

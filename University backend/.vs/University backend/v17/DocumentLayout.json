@@ -1,9 +1,29 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\itay7\\Desktop\\University\\University backend\\",
+  "WorkspaceRootPath": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|c:\\users\\itay7\\desktop\\university\\university backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|c:\\users\\itay7\\desktop\\matrix\\university backend\\4-services\\lessonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|solutionrelative:4-services\\lessonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|c:\\users\\itay7\\desktop\\matrix\\university backend\\4-services\\enrollmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|solutionrelative:4-services\\enrollmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|c:\\users\\itay7\\desktop\\matrix\\university backend\\5-controllers\\enrollmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|solutionrelative:5-controllers\\enrollmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|c:\\users\\itay7\\desktop\\matrix\\university backend\\5-controllers\\progresscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|solutionrelative:5-controllers\\progresscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|c:\\users\\itay7\\desktop\\matrix\\university backend\\4-services\\progressservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|solutionrelative:4-services\\progressservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|c:\\users\\itay7\\desktop\\matrix\\university backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E13DFE20-AEF9-4C77-B157-58AD4CD29FCD}|University backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -14,25 +34,90 @@
       "DocumentGroups": [
         {
           "DockedWidth": 165,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\itay7\\Desktop\\University\\University backend\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\itay7\\Desktop\\University\\University backend\\Program.cs",
+              "ToolTip": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAuwDIAAABWAAAAAAAAAA==",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAuwGoAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-09T17:30:07.115Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LessonService.cs",
+              "DocumentMoniker": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\4-Services\\LessonService.cs",
+              "RelativeDocumentMoniker": "4-Services\\LessonService.cs",
+              "ToolTip": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\4-Services\\LessonService.cs",
+              "RelativeToolTip": "4-Services\\LessonService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T22:13:04.168Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EnrollmentController.cs",
+              "DocumentMoniker": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\5-Controllers\\EnrollmentController.cs",
+              "RelativeDocumentMoniker": "5-Controllers\\EnrollmentController.cs",
+              "ToolTip": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\5-Controllers\\EnrollmentController.cs",
+              "RelativeToolTip": "5-Controllers\\EnrollmentController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T21:02:06.654Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EnrollmentService.cs",
+              "DocumentMoniker": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\4-Services\\EnrollmentService.cs",
+              "RelativeDocumentMoniker": "4-Services\\EnrollmentService.cs",
+              "ToolTip": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\4-Services\\EnrollmentService.cs",
+              "RelativeToolTip": "4-Services\\EnrollmentService.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAEkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T20:49:55.879Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ProgressService.cs",
+              "DocumentMoniker": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\4-Services\\ProgressService.cs",
+              "RelativeDocumentMoniker": "4-Services\\ProgressService.cs",
+              "ToolTip": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\4-Services\\ProgressService.cs",
+              "RelativeToolTip": "4-Services\\ProgressService.cs",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAIwGsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T20:08:31.434Z",
+              "EditorCaption": ""
+            },
+            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProgressController.cs",
+              "DocumentMoniker": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\5-Controllers\\ProgressController.cs",
+              "RelativeDocumentMoniker": "5-Controllers\\ProgressController.cs",
+              "ToolTip": "C:\\Users\\itay7\\Desktop\\Matrix\\University backend\\5-Controllers\\ProgressController.cs",
+              "RelativeToolTip": "5-Controllers\\ProgressController.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T13:56:19.126Z",
+              "EditorCaption": ""
             }
           ]
         }

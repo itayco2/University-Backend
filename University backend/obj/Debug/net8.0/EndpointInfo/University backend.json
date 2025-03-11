@@ -207,6 +207,10 @@
                   "EnrolledAt": {
                     "type": "string",
                     "format": "date-time"
+                  },
+                  "ProgressPercentage": {
+                    "type": "number",
+                    "format": "double"
                   }
                 }
               },
@@ -221,6 +225,9 @@
                   "style": "form"
                 },
                 "EnrolledAt": {
+                  "style": "form"
+                },
+                "ProgressPercentage": {
                   "style": "form"
                 }
               }
@@ -359,6 +366,29 @@
         }
       }
     },
+    "/api/courses/{courseId}/lessons": {
+      "get": {
+        "tags": [
+          "Lesson"
+        ],
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/progress": {
       "post": {
         "tags": [
@@ -398,6 +428,61 @@
         "parameters": [
           {
             "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/progress/{userId}/course/{courseId}": {
+      "get": {
+        "tags": [
+          "Progress"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "courseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/progress/user/{userId}": {
+      "get": {
+        "tags": [
+          "Progress"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
             "in": "path",
             "required": true,
             "schema": {
@@ -583,15 +668,11 @@
         "type": "object",
         "properties": {
           "email": {
-            "maxLength": 100,
-            "minLength": 2,
-            "pattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$",
+            "minLength": 1,
             "type": "string"
           },
           "password": {
-            "maxLength": 100,
-            "minLength": 8,
-            "pattern": "^(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$",
+            "minLength": 1,
             "type": "string"
           }
         },
@@ -751,9 +832,7 @@
       },
       "RegisterCredentials": {
         "required": [
-          "email",
           "name",
-          "password",
           "roleId"
         ],
         "type": "object",
@@ -764,13 +843,18 @@
             "type": "string"
           },
           "email": {
-            "minLength": 1,
+            "maxLength": 100,
+            "minLength": 2,
+            "pattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$",
             "type": "string",
-            "format": "email"
+            "nullable": true
           },
           "password": {
+            "maxLength": 100,
             "minLength": 8,
-            "type": "string"
+            "pattern": "^(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$",
+            "type": "string",
+            "nullable": true
           },
           "roleId": {
             "type": "integer",

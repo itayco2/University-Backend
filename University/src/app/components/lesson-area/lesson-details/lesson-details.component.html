@@ -1,17 +1,18 @@
-<div *ngIf="lesson">
-
-    <h3>Name: {{lesson.title}}</h3>
-    
-    <h3>Price: {{lesson.videoUrl}}</h3>
-
-    <a routerLink="/lessons">Back</a>
-    
-    <span> | </span>
-    
-    <!-- <a routerLink="/products/edit/{{product.id}}">Edit</a> -->
-    
-    <span> | </span>
-
-    <a href="javascript:void(0)" (click)="deleteMe(lesson.id)">Delete</a>
-    
-</div>
+<div *ngIf="lesson; else loading">
+    <h2>{{ lesson.title }}</h2>
+  
+    <div class="video-container">
+      <iframe [src]="getVideoUrl(lesson.videoUrl)" width="560" height="315" title="YouTube video player" frameborder="0" allow="accelerometer;
+       autoplay; clipboard-write; encrypted-media; gyroscope;
+        picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  
+    <button (click)="markAsWatched()" class="mark-watched-btn">Mark as Watched</button>
+  
+    <button *ngIf="canDeleteLesson" (click)="deleteMe(lesson.id)" class="delete-lesson-btn">Delete Lesson</button>
+  </div>
+  
+  <ng-template #loading>
+    <p>Loading lesson details...</p>
+  </ng-template>
+  

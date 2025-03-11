@@ -13,37 +13,57 @@ export class LessonService {
   private http = inject(HttpClient);
   private lessonStore = inject(LessonStore);
 
-  public async getAllLessons():Promise<LessonModel[]>{
-    if(this.lessonStore.count()) return this.lessonStore.lessons();
+  public async getAllLessons(): Promise<LessonModel[]> {
+    if (this.lessonStore.count()) return this.lessonStore.lessons();
     const dbLesson$ = this.http.get<LessonModel[]>(environment.lessonUrl);
     const dbLesson = await firstValueFrom(dbLesson$);
     this.lessonStore.initLessons(dbLesson);
     return dbLesson;
   }
 
-  public async getOneLesson(id:string): Promise<LessonModel>{
-    const dbLesson = this.lessonStore.lessons().find( l => l.id === id);
-    if(dbLesson) return dbLesson;
-    const lessons$ =this.http.get<LessonModel>(environment.lessonUrl+id);
+public async getLessonsForCourse(courseId: string): Promise<LessonModel[]> {
+    const lessons = this.lessonStore.lessons();
+    if (lessons.length) return lessons.filter(lesson => lesson.courseId === courseId);
+    const lessons$ = this.http.get<LessonModel[]>(`${environment.lessonUrl}?courseId=${courseId}`);
+    const dbLessons = await firstValueFrom(lessons$);
+    this.lessonStore.initLessons(dbLessons);
+    return dbLessons.filter(lesson => lesson.courseId === courseId);
+}
+
+  // Get a single lesson by ID (unchanged)
+  public async getOneLesson(id: string): Promise<LessonModel> {
+    const dbLesson = this.lessonStore.lessons().find(l => l.id === id);
+    if (dbLesson) return dbLesson;
+    const lessons$ = this.http.get<LessonModel>(environment.lessonUrl + id);
     const dbLessons = await firstValueFrom(lessons$);
     return dbLessons;
   }
 
-  public async addLesson(lesson : LessonModel): Promise<void>{
-    const dbLesson$ = this.http.post<LessonModel>(environment.lessonUrl, LessonModel.toFormData(lesson));
-    const dbLesson= await firstValueFrom(dbLesson$);
-    this.lessonStore.addLesson(dbLesson)
+ // Add a new lesson
+public async addLesson(lesson: LessonModel): Promise<void> {
+    // Ensure you're sending the data as JSON and not FormData
+    const dbLesson$ = this.http.post<LessonModel>(environment.lessonUrl, lesson, {
+      headers: {
+        'Content-Type': 'application/json' // Make sure the content type is JSON
+      }
+    });
+  
+    const dbLesson = await firstValueFrom(dbLesson$);
+    this.lessonStore.addLesson(dbLesson);
   }
+  
 
-  public async updateLesson(lesson : LessonModel): Promise<void>{
+  // Update an existing lesson (unchanged)
+  public async updateLesson(lesson: LessonModel): Promise<void> {
     const dbLesson$ = this.http.put<LessonModel>(environment.lessonUrl, LessonModel.toFormData(lesson));
-    const dbLesson= await firstValueFrom(dbLesson$);
-    this.lessonStore.updateLesson(dbLesson)
+    const dbLesson = await firstValueFrom(dbLesson$);
+    this.lessonStore.updateLesson(dbLesson);
   }
 
-  public async deleteLesson(id:string): Promise<void>{
+  // Delete a lesson (unchanged)
+  public async deleteLesson(id: string): Promise<void> {
     const dbLesson$ = this.http.delete<LessonModel>(environment.lessonUrl + id);
     await firstValueFrom(dbLesson$);
-    this.lessonStore.deleteLesson(id)
+    this.lessonStore.deleteLesson(id);
   }
 }

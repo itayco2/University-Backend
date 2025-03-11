@@ -39,7 +39,6 @@ export const CourseStore = signalStore(
 
     // Create computed values: 
     withComputed(store => ({
-        // Product count: 
         count: computed(() => store.courses().length),
     })),
 

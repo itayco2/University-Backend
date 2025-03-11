@@ -1,5 +1,7 @@
 ﻿using FluentValidation;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace University_backend
 {
@@ -12,36 +14,36 @@ namespace University_backend
             _enrollmentService = enrollmentService;
 
             RuleFor(enrollment => enrollment.UserId)
-                .NotEmpty().WithMessage("Missing user id.")
-                .MustAsync(async (userId, cancellation) => await UserExists(userId))
+                .NotEmpty().WithMessage("User ID is required.")
+                .MustAsync(UserExistsAsync)
                 .WithMessage("User does not exist.");
 
             RuleFor(enrollment => enrollment.CourseId)
-                .NotEmpty().WithMessage("Missing course id.")
-                .MustAsync(async (courseId, cancellation) => await CourseExists(courseId))
+                .NotEmpty().WithMessage("Course ID is required.")
+                .MustAsync(CourseExistsAsync)
                 .WithMessage("Course does not exist.");
 
             RuleFor(enrollment => new { enrollment.UserId, enrollment.CourseId })
-                .MustAsync(async (data, cancellation) => !await IsUserAlreadyEnrolled(data.UserId, data.CourseId))
+                .MustAsync(EnrollmentDoesNotExistAsync)
                 .WithMessage("User is already enrolled in this course.");
         }
 
-        private async Task<bool> UserExists(Guid userId)
+        private async Task<bool> UserExistsAsync(Guid userId, CancellationToken cancellationToken)
         {
             bool userExists = await _enrollmentService.UserExists(userId);
             return userExists;
         }
 
-        private async Task<bool> CourseExists(Guid courseId)
+        private async Task<bool> CourseExistsAsync(Guid courseId, CancellationToken cancellationToken)
         {
             bool courseExists = await _enrollmentService.CourseExists(courseId);
             return courseExists;
         }
 
-        private async Task<bool> IsUserAlreadyEnrolled(Guid userId, Guid courseId)
+        private async Task<bool> EnrollmentDoesNotExistAsync(dynamic data, CancellationToken cancellationToken)
         {
-            bool isEnrolled = await _enrollmentService.IsUserAlreadyEnrolled(userId, courseId);
-            return isEnrolled;
+            bool isAlreadyEnrolled = await _enrollmentService.IsUserAlreadyEnrolled(data.UserId, data.CourseId);
+            return !isAlreadyEnrolled;
         }
     }
 }

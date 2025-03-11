@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace University_backend;
 
@@ -26,6 +27,13 @@ public class LessonController : ControllerBase
         return Ok(dbLesson);
     }
 
+    [HttpGet("api/courses/{courseId}/lessons")]
+    public async Task<IActionResult> GetLessonsForCourse([FromRoute] Guid courseId)
+    {
+        List<LessonDto> lessons = await _lessonService.GetLessonsForCourse(courseId);
+        return Ok(lessons);
+    }
+
     [HttpPost("api/lessons")]
     public async Task<IActionResult> AddLesson([FromBody] LessonDto lessonDto)
     {
@@ -34,6 +42,7 @@ public class LessonController : ControllerBase
         LessonDto dbLesson = await _lessonService.AddLesson(lessonDto);
         return Created($"api/lessons/{dbLesson.Id}", dbLesson);
     }
+
 
     [HttpPut("api/lessons/{id}")]
     public async Task<IActionResult> UpdateFullLesson([FromRoute] Guid id, [FromBody] LessonDto lessonDto)
