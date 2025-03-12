@@ -54,4 +54,7 @@ public class CoursesController : ControllerBase
         if (!success) return NotFound(new ResourceNotFound(id));
         return NoContent();
     }
+
 }
+
+

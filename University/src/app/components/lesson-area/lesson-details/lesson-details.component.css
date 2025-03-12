@@ -1,55 +1,109 @@
-/* Style for the buttons container */
-.video-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
+/* Lesson Details Styles */
+.lesson-details {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
   }
   
-  /* Common button styles */
-  button {
-    padding: 10px 20px;
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    background: linear-gradient(90deg, #0ea5e9 0%, #2563eb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .video-container {
+    position: relative;
+    width: 70%; /* Reduced from 100% to 70% */
+    max-width: 640px; /* Added max-width constraint */
+    padding-bottom: 39.375%; /* 70% of 56.25% (16:9 Aspect Ratio) */
+    margin: 2rem auto; /* Added auto left/right margin to center */
+    background-color: #f1f5f9;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 10px 0;
   }
   
-  /* Mark as Watched Button */
+  button {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 1rem auto;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
   .mark-watched-btn {
-    background-color: #4CAF50; /* Green */
+    background-color: #0ea5e9;
     color: white;
-    font-weight: bold;
   }
   
   .mark-watched-btn:hover {
-    background-color: #45a049;
+    background-color: #0284c7;
+    transform: translateY(-2px);
   }
   
-  .mark-watched-btn:focus {
-    outline: none;
+  .watched-message-btn {
+    background-color: #e2e8f0;
+    color: #64748b;
+    cursor: not-allowed;
   }
   
-  /* Delete Lesson Button */
   .delete-lesson-btn {
-    background-color: #f44336; /* Red */
+    background-color: #ef4444;
     color: white;
-    font-weight: bold;
+    margin-top: 2rem;
   }
   
   .delete-lesson-btn:hover {
-    background-color: #d32f2f;
+    background-color: #dc2626;
+    transform: translateY(-2px);
   }
   
-  .delete-lesson-btn:focus {
-    outline: none;
+  /* Loading State */
+  p {
+    text-align: center;
+    color: #64748b;
+    font-size: 1rem;
+    margin: 2rem 0;
   }
   
-  /* Optional: Additional hover/focus styles */
-  button:disabled {
-    background-color: #d3d3d3;
-    cursor: not-allowed;
+  /* Animation for content loading */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .lesson-details {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .lesson-details {
+      padding: 1rem;
+    }
+  
+    h2 {
+      font-size: 1.5rem;
+    }
   }
   

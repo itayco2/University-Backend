@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ProgressModel } from '../models/progress.model';
 import { environment } from '../../environments/environment';
 
@@ -25,4 +25,13 @@ export class ProgressService {
   getProgressByUserIdAndProgressId(userId: string, progressId: string): Observable<ProgressModel> {
     return this.http.get<ProgressModel>(`${environment.progressUrl}/${userId}/${progressId}`);
   }
+
+  getCourseProgress(userId: string, courseId: string): Observable<any> {
+    return this.http.get<any>(`${environment.progressUrl}/user/${userId}/course/${courseId}/progress`).pipe(
+        tap(response => {
+            console.log('API Response:', response); // Log the response to check the structure
+        })
+    );
+}
+
 }

@@ -34,6 +34,14 @@ namespace University_backend
                 .AnyAsync(e => e.UserId == userId && e.CourseId == courseId);
         }
 
+        public async Task<IEnumerable<Enrollment>> GetEnrollmentsByUserId(Guid userId)
+        {
+            return await _db.Enrollments
+                .Where(e => e.UserId == userId)
+                .ToListAsync();
+        }
+
+
         public async Task<List<EnrollmentDto>> GetAllEnrollmentsAsync()
         {
             List<EnrollmentDto> enrollmentDtos = await _db.Enrollments
@@ -43,6 +51,7 @@ namespace University_backend
 
             return enrollmentDtos;
         }
+
 
         public async Task<EnrollmentDto> CreateEnrollmentAsync(EnrollmentDto enrollmentDto)
         {

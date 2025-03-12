@@ -8,6 +8,7 @@ import { Router, RouterModule } from '@angular/router';
 import { NotifyService } from '../../../services/notify.service';
 import { UserStore } from '../../../storage/user-store';
 import { EnrollmentModel } from '../../../models/enrollment.model';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-course-list',
@@ -19,8 +20,9 @@ import { EnrollmentModel } from '../../../models/enrollment.model';
 export class CourseListComponent implements OnInit {
   public courses: CourseModel[] = [];
   public enrolledCourses: EnrollmentModel[] = [];
-
-  private userStore = inject(UserStore); // Using inject instead of constructor injection
+  public authService = inject(AuthService); 
+  private userStore = inject(UserStore); 
+  public canAddCourse: boolean = false; 
 
   constructor(
     private courseService: CourseService,
@@ -31,8 +33,12 @@ export class CourseListComponent implements OnInit {
 
   public async ngOnInit() {
     try {
+      // Fetch all courses
       this.courses = await this.courseService.getAllCourses();
-      await this.loadEnrollments(); 
+      await this.loadEnrollments();
+
+      // Check if the user has Admin or Professor roles to show "Add Course" button
+      this.canAddCourse = this.authService.hasRole(['Admin', 'Professor']);
     } catch (err: any) {
       this.notifyService.error(err);
     }
@@ -45,6 +51,7 @@ export class CourseListComponent implements OnInit {
         this.notifyService.error('User not found');
         return;
       }
+      // Check enrollments for each course
       for (let course of this.courses) {
         const isEnrolled = await this.enrollmentService.userAlreadyEnrolled(user.id, course.id);
         if (isEnrolled) {
@@ -76,11 +83,15 @@ export class CourseListComponent implements OnInit {
       };
 
       await this.enrollmentService.addEnrollment(enrollment);
-      this.enrolledCourses.push(enrollment); // Update the list
+      this.enrolledCourses.push(enrollment); // Update the list of enrolled courses
 
       this.notifyService.success(`Successfully enrolled in ${course.title}!`);
     } catch (err: any) {
       this.notifyService.error(err);
     }
+  }
+
+  canViewCourse(): boolean {
+    return this.authService.hasRole(['Admin', 'Professor']);
   }
 }

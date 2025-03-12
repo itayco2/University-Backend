@@ -10,15 +10,19 @@
                 <span class="course-date">{{ course.createdAt | date }}</span>
             </div>
             
+            <!-- Enroll button, visible only if the user is not enrolled -->
             <button *ngIf="!isEnrolled(course)" class="enroll-btn" (click)="enroll(course)">
                 Enroll Now
             </button>
+
+            <!-- Already Enrolled button, visible if the user is enrolled -->
             <button *ngIf="isEnrolled(course)" class="enrolled-btn" disabled>
                 Already Enrolled
             </button>
 
-            <button class="lesson-btn" 
-                    [routerLink]="['/course-details/', course.id , 'lessons']" 
+            <!-- View Lessons button, visible only if the user is enrolled -->
+            <button *ngIf="isEnrolled(course)" class="lesson-btn" 
+                    [routerLink]="['/course-details/', course.id, 'lessons']" 
                     routerLinkActive="active" 
                     [routerLinkActiveOptions]="{ exact: true }">
                 View Lessons
@@ -27,7 +31,7 @@
     </div>
 </div>
 
-<div>
+<div *ngIf="canViewCourse()">
     <a routerLink="/course/new" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
         <span class="nav-text">Add Course</span>
     </a>

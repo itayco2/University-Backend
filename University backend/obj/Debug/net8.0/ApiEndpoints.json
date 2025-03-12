@@ -192,6 +192,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "University_backend.EnrollmentController",
+    "Method": "GetEnrollmentsByUserId",
+    "RelativePath": "api/enrollments/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "University_backend.LessonController",
     "Method": "GetAllLessons",
     "RelativePath": "api/lessons",
@@ -333,6 +349,27 @@
       },
       {
         "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "University_backend.ProgressController",
+    "Method": "GetCourseProgressAsync",
+    "RelativePath": "api/progress/user/{userId}/course/{courseId}/progress",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "courseId",
         "Type": "System.Guid",
         "IsRequired": true
       }

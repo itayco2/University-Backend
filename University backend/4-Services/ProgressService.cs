@@ -79,6 +79,23 @@ public class ProgressService : IDisposable
         return progressExists;
     }
 
+    public async Task<(int TotalLessons, int WatchedLessons)> GetCourseProgressAsync(Guid userId, Guid courseId)
+    {
+        int totalLessons = await _db.Lessons
+            .Where(l => l.CourseId == courseId)
+            .CountAsync();
+        Console.WriteLine($"Total lessons: {totalLessons} for CourseId: {courseId}");
+
+        int watchedLessons = await _db.Progress
+            .Where(p => p.UserId == userId && p.Lesson.CourseId == courseId && p.WatchedAt != null)
+            .CountAsync();
+        Console.WriteLine($"Watched lessons: {watchedLessons} for UserId: {userId}, CourseId: {courseId}");
+
+        return (TotalLessons: totalLessons, WatchedLessons: watchedLessons);
+    }
+
+
+
     public void Dispose()
     {
         _db.Dispose();

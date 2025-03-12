@@ -34,6 +34,19 @@ public class EnrollmentController : ControllerBase
         }
     }
 
+    [HttpGet("api/enrollments/user/{userId}")]
+    public async Task<IActionResult> GetEnrollmentsByUserId([FromRoute] Guid userId)
+    {
+        var enrollments = await _enrollmentService.GetEnrollmentsByUserId(userId);
+        if (enrollments == null || !enrollments.Any())
+        {
+            return NotFound();
+        }
+
+        return Ok(enrollments);
+    }
+
+
     [HttpGet("api/enrollments/is-enrolled/{userId}/{courseId}")]
     public async Task<IActionResult> IsUserEnrolled([FromRoute] Guid userId, [FromRoute] Guid courseId)
     {

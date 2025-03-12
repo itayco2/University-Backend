@@ -5,7 +5,7 @@ import { MenuComponent } from "../menu/menu.component";
 
 @Component({
   selector: 'app-header',
-  imports: [ UserMenuComponent, MenuComponent],
+  imports: [UserMenuComponent, MenuComponent, LogoComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
