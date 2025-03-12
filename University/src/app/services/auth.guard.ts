@@ -37,7 +37,7 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state) =
   const notifyService = inject(NotifyService);
   const router = inject(Router);
 
-  notifyService.error('You are not logged in.');
+  notifyService.error('You must be logged in to watch courses.');
   router.navigateByUrl('/login');
   return false;
 };

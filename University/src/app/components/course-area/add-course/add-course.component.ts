@@ -5,10 +5,13 @@ import { CourseModel } from '../../../models/course.model';
 import { CourseService } from '../../../services/course.service';
 import { Router } from '@angular/router';
 import { NotifyService } from '../../../services/notify.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-add-course',
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule,CommonModule,MatFormFieldModule,MatButtonModule,MatInputModule],
   templateUrl: './add-course.component.html',
   styleUrl: './add-course.component.css'
 })

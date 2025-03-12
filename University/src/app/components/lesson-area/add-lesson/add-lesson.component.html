@@ -1,23 +1,41 @@
 <div>
-
-
     <form [formGroup]="lessonForm" (submit)="send()">
 
-        <label>Title: </label>
-        <input type="text" formControlName="titleControl">
-        <span *ngIf="lessonForm.controls['titleControl'].errors?.['required'] && lessonForm.controls['titleControl'].touched">Missing title.</span>
-        <span *ngIf="lessonForm.controls['titleControl'].errors?.['minlength'] && lessonForm.controls['titleControl'].touched">Title too short.</span>
-        <span *ngIf="lessonForm.controls['titleControl'].errors?.['maxlength'] && lessonForm.controls['titleControl'].touched">Title too long.</span>
+        <!-- Title Field -->
+        <mat-form-field appearance="outline">
+            <mat-label>Title: </mat-label>
+            <input matInput formControlName="titleControl" type="text">
+            <mat-error *ngIf="lessonForm.controls['titleControl'].hasError('required') && lessonForm.controls['titleControl'].touched">
+                Missing title.
+            </mat-error>
+            <mat-error *ngIf="lessonForm.controls['titleControl'].hasError('minlength') && lessonForm.controls['titleControl'].touched">
+                Title too short.
+            </mat-error>
+            <mat-error *ngIf="lessonForm.controls['titleControl'].hasError('maxlength') && lessonForm.controls['titleControl'].touched">
+                Title too long.
+            </mat-error>
+        </mat-form-field>
 
-        <label>Video Url: </label>
-        <textarea formControlName="videoUrlControl"></textarea>
-        <span *ngIf="lessonForm.controls['videoUrlControl'].errors?.['required'] && lessonForm.controls['videoUrlControl'].touched">Missing Video Url.</span>
-        <span *ngIf="lessonForm.controls['videoUrlControl'].errors?.['minlength'] && lessonForm.controls['videoUrlControl'].touched">Video Url is too short.</span>
-        <span *ngIf="lessonForm.controls['videoUrlControl'].errors?.['maxlength'] && lessonForm.controls['videoUrlControl'].touched">Video Url can't exceed 1000.</span>
+        <!-- Video URL Field -->
+        <mat-form-field appearance="outline">
+            <mat-label>Video URL: </mat-label>
+            <textarea matInput formControlName="videoUrlControl"></textarea>
+            <mat-error *ngIf="lessonForm.controls['videoUrlControl'].hasError('required') && lessonForm.controls['videoUrlControl'].touched">
+                Missing Video URL.
+            </mat-error>
+            <mat-error *ngIf="lessonForm.controls['videoUrlControl'].hasError('minlength') && lessonForm.controls['videoUrlControl'].touched">
+                Video URL is too short.
+            </mat-error>
+            <mat-error *ngIf="lessonForm.controls['videoUrlControl'].hasError('maxlength') && lessonForm.controls['videoUrlControl'].touched">
+                Video URL can't exceed 1000 characters.
+            </mat-error>
+        </mat-form-field>
 
-     
-        <button [disabled]="lessonForm.invalid">Add</button>
+        <!-- Submit Button -->
+        <div class="button-container">
+            <button mat-raised-button color="primary" type="submit" [disabled]="lessonForm.invalid">Send</button>
+            <button mat-raised-button color="secondary" type="reset">Clear</button>
+        </div>
 
     </form>
-
 </div>

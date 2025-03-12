@@ -1,14 +1,27 @@
-<div>
-    @if (userStore.user()) {
-        <span>Hello {{userStore.fullname()}} | </span>
-        <a routerLink="/home" (click)="logMeOut()">Logout</a>
-        <span> | </span>
-        <a [routerLink]="['/progress', userStore.user().id]">View My Progress</a>
-    }
-    @else {
+<div class="user-menu">
+    <!-- Check if the user is logged in -->
+    <ng-container *ngIf="userStore.user(); else guestMenu">
+        <div class="user-info">
+            <!-- Avatar with click event to toggle dropdown -->
+            <img class="user-avatar" src="assets/images/avatar.png" alt="User Avatar" (click)="toggleMenu()" />
+        </div>
+
+        <!-- Dropdown Menu -->
+        <div *ngIf="menuOpen" class="dropdown-menu">
+            <div class="dropdown-option">
+                <a routerLink="/home" (click)="logMeOut()">Logout</a>
+            </div>
+            <div class="dropdown-option">
+                <a [routerLink]="['/progress', userStore.user().id]">View My Progress</a>
+            </div>
+        </div>
+    </ng-container>
+
+    <!-- Menu for guests -->
+    <ng-template #guestMenu>
         <span>Hello Guest | </span>
         <a routerLink="/login">Login</a>
         <span> | </span>
         <a routerLink="/register">Register</a>
-    }
+    </ng-template>
 </div>

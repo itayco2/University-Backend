@@ -30,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 165,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
@@ -44,6 +44,10 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-09T17:30:07.115Z",
               "IsPinned": true
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",
@@ -68,8 +72,7 @@
               "RelativeToolTip": "4-Services\\CourseService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T11:00:30.061Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-12T11:00:30.061Z"
             },
             {
               "$type": "Document",
@@ -81,12 +84,7 @@
               "RelativeToolTip": "5-Controllers\\ProgressController.cs",
               "ViewState": "AgIAACsAAAAAAAAAAAAcwDMAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T09:48:42.731Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+              "WhenOpened": "2025-03-12T09:48:42.731Z"
             },
             {
               "$type": "Document",
@@ -98,8 +96,7 @@
               "RelativeToolTip": "4-Services\\ProgressService.cs",
               "ViewState": "AgIAAEkAAAAAAAAAAAAcwF8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T20:08:31.434Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-11T20:08:31.434Z"
             }
           ]
         }

@@ -5,10 +5,13 @@ import { NotifyService } from '../../../services/notify.service';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LessonModel } from '../../../models/lesson.model';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-add-lesson',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule,CommonModule,MatFormFieldModule,MatButtonModule,MatInputModule],
   templateUrl: './add-lesson.component.html',
   styleUrl: './add-lesson.component.css'
 })

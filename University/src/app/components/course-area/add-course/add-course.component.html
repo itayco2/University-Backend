@@ -1,23 +1,40 @@
 <div>
-
-
     <form [formGroup]="courseForm" (submit)="send()">
+        
+        <!-- Title Field -->
+        <mat-form-field appearance="outline">
+            <mat-label>Title: </mat-label>
+            <input matInput formControlName="titleControl" type="text">
+            <mat-error *ngIf="courseForm.controls['titleControl'].hasError('required') && courseForm.controls['titleControl'].touched">
+                Title is required.
+            </mat-error>
+            <mat-error *ngIf="courseForm.controls['titleControl'].hasError('minlength') && courseForm.controls['titleControl'].touched">
+                Title can't be less than 2 characters.
+            </mat-error>
+            <mat-error *ngIf="courseForm.controls['titleControl'].hasError('maxlength') && courseForm.controls['titleControl'].touched">
+                Title can't exceed 100 characters.
+            </mat-error>
+        </mat-form-field>
 
-        <label>Title: </label>
-        <input type="text" formControlName="titleControl">
-        <span *ngIf="courseForm.controls['titleControl'].errors?.['required'] && courseForm.controls['titleControl'].touched">Missing name.</span>
-        <span *ngIf="courseForm.controls['titleControl'].errors?.['minlength'] && courseForm.controls['titleControl'].touched">Name too short.</span>
-        <span *ngIf="courseForm.controls['titleControl'].errors?.['maxlength'] && courseForm.controls['titleControl'].touched">Name too long.</span>
-
-        <label>Description: </label>
-        <textarea formControlName="descriptionControl"></textarea>
-        <span *ngIf="courseForm.controls['descriptionControl'].errors?.['required'] && courseForm.controls['descriptionControl'].touched">Missing Description.</span>
-        <span *ngIf="courseForm.controls['descriptionControl'].errors?.['minlength'] && courseForm.controls['descriptionControl'].touched">Description is too short.</span>
-        <span *ngIf="courseForm.controls['descriptionControl'].errors?.['maxlength'] && courseForm.controls['descriptionControl'].touched">Description can't exceed 1000.</span>
-
-     
-        <button [disabled]="courseForm.invalid">Add</button>
-
+        <!-- Description Field -->
+        <mat-form-field appearance="outline">
+            <mat-label>Description: </mat-label>
+            <textarea matInput formControlName="descriptionControl"></textarea>
+            <mat-error *ngIf="courseForm.controls['descriptionControl'].hasError('required') && courseForm.controls['descriptionControl'].touched">
+                Description is required.
+            </mat-error>
+            <mat-error *ngIf="courseForm.controls['descriptionControl'].hasError('minlength') && courseForm.controls['descriptionControl'].touched">
+                Description can't be less than 10 characters.
+            </mat-error>
+            <mat-error *ngIf="courseForm.controls['descriptionControl'].hasError('maxlength') && courseForm.controls['descriptionControl'].touched">
+                Description can't exceed 1000 characters.
+            </mat-error>
+        </mat-form-field>
+        
+        <!-- Buttons -->
+        <div class="button-container">
+            <button mat-raised-button color="primary" type="submit" [disabled]="courseForm.invalid">Send</button>
+            <button mat-raised-button color="secondary" type="reset">Clear</button>
+        </div>
     </form>
-
 </div>

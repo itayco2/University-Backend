@@ -1,82 +1,102 @@
-/* Header Styles */
+/* App Header Styles */
 .app-header {
-    background-color: #ffffff;
+    background-color: #003366;
+    color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: fixed;
+    position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
+    z-index: 1000;
     width: 100%;
-    z-index: 100;
   }
   
-  /* Main header layout */
   .header-container {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 1rem 2rem;
-    max-width: 1200px;
+    align-items: center;
+    padding: 0.8rem 2rem;
+    max-width: 1400px;
     margin: 0 auto;
-    width: 100%;
+    height: 70px;
   }
   
-  /* Left Section: Logo & Menu */
+  /* Left Section with Logo and Menu */
   .left-section {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    flex-shrink: 0;
+    gap: 2rem;
+    flex: 1;
   }
   
-  /* Centered Title */
+  /* Center Title */
   .site-title {
-    flex-grow: 1;
-    text-align: center;
     font-size: 1.8rem;
     font-weight: 700;
-    color: #222; /* Dark color for visibility */
     margin: 0;
-    white-space: nowrap;
+    letter-spacing: 0.5px;
+    color: #fff;
+    text-transform: uppercase;
+    flex: 1;
+    text-align: center;
   }
   
-  /* Right Section: User Menu */
+  /* Right User Menu */
   .user-menu-container {
     display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-shrink: 0;
+    justify-content: flex-end;
+    flex: 1;
   }
   
-  /* Responsive adjustments */
-  @media (max-width: 992px) {
-    .header-container {
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-  
-    .left-section {
-      width: auto;
-    }
-  
-    .site-title {
-      order: -1;
-      width: 100%;
-      text-align: center;
-      margin-bottom: 0.75rem;
-    }
+  /* Target the Angular Components */
+  app-logo {
+    display: block;
   }
   
+  app-menu {
+    display: flex;
+  }
+  
+  app-user-menu {
+    display: block;
+  }
+  
+  /* Responsive Design */
   @media (max-width: 768px) {
     .header-container {
-      flex-direction: column;
-      align-items: center;
+      padding: 0.6rem 1rem;
+      height: 60px;
     }
-  
-    .user-menu-container {
-      justify-content: center;
-      width: 100%;
-      margin-top: 0.5rem;
+    
+    .site-title {
+      font-size: 1.4rem;
+    }
+    
+    .left-section {
+      gap: 1rem;
     }
   }
   
+  @media (max-width: 576px) {
+    .header-container {
+      flex-wrap: wrap;
+      height: auto;
+      padding: 0.5rem;
+    }
+    
+    .site-title {
+      font-size: 1.2rem;
+      order: 1;
+      width: 100%;
+      text-align: center;
+      margin: 0.5rem 0;
+    }
+    
+    .left-section {
+      order: 2;
+      flex: 0 0 50%;
+    }
+    
+    .user-menu-container {
+      order: 3;
+      flex: 0 0 50%;
+    }
+  }

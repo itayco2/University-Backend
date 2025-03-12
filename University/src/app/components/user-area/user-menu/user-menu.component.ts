@@ -17,16 +17,18 @@ export class UserMenuComponent {
     public notifyService = inject(NotifyService);
     public router = inject(Router);
 
+    menuOpen: boolean = false; // To track whether the dropdown is open
+
+    toggleMenu(): void {
+        this.menuOpen = !this.menuOpen;
+    }
+
 
     public logMeOut(): void {
         localStorage.clear();
-        
         sessionStorage.clear();
-        
         this.userService.logout();
-        
         this.notifyService.success("Have a nice day!");
-        
         this.router.navigate(['/home']);
     }
     
