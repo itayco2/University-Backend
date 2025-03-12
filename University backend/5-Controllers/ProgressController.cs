@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace University_backend
@@ -19,7 +17,6 @@ namespace University_backend
             _mapper = mapper;
         }
 
-        // POST: api/progress
         [HttpPost("api/progress")]
         public async Task<IActionResult> CreateProgressAsync([FromBody] ProgressDto progressDto)
         {
@@ -37,7 +34,6 @@ namespace University_backend
             }
         }
 
-        // GET: api/progress/{id}
         [HttpGet("api/progress/{id}")]
         public async Task<IActionResult> GetProgressById(Guid id)
         {
@@ -47,27 +43,6 @@ namespace University_backend
             return Ok(progressDto);
         }
 
-        // GET: api/progress/{userId}/course/{courseId}
-        [HttpGet("api/progress/{userId}/course/{courseId}")]
-        public async Task<IActionResult> GetCourseProgress(Guid userId, Guid courseId)
-        {
-double progress = await _progressService.GetProgressByUserIdAndCourseIdAsync(userId, courseId);
-            return Ok(new { progress });
-        }
-
-        // GET: api/progress/user/{userId}
-        [HttpGet("api/progress/user/{userId}")]
-        public async Task<IActionResult> GetProgressByUserId([FromRoute] Guid userId)
-        {
-            List<ProgressDto> progress = await _progressService.GetProgressByUserIdAsync(userId);
-            if (progress == null || !progress.Any())
-            {
-                return NotFound(new { Message = "No progress found for the specified user." });
-            }
-            return Ok(progress);
-        }
-
-        // GET: api/progress/{userId}/{id}
         [HttpGet("api/progress/{userId}/{id}")]
         public async Task<IActionResult> GetProgressByUserIdAndProgressIdAsync(Guid userId, Guid id)
         {

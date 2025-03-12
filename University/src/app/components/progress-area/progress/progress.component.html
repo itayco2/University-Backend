@@ -1,25 +1,24 @@
-<div *ngIf="courses.length > 0; else loading">
-    <h2>Your Progress</h2>
-    <div *ngFor="let course of courses">
-      <div>
-        <h3>{{ course.title }}</h3>
-        <p>{{ course.description }}</p>
-  
-        <!-- Display progress -->
-        <p *ngIf="getCourseProgress(course.id) === 'Not completed yet'" class="incomplete">
-          Not completed yet
-        </p>
-        <p *ngIf="getCourseProgress(course.id) !== 'Not completed yet'" class="completed">
-          {{ getCourseProgress(course.id) }}
-        </p>
-            <button class="lesson-btn" [routerLink]="['/course-details/', course.id , 'lessons']" 
-            routerLinkActive="active" 
-            [routerLinkActiveOptions]="{ exact: true }">view Lessons</button>
+<div class="progress-container">
+    <h2>Your Enrolled Courses and Progress</h2>
+    
+    <!-- Check if user has enrolled courses -->
+    <div *ngIf="courses.length > 0; else noCourses">
+      <div *ngFor="let course of courses" class="course-card">
+        <h3>{{ course.id }}</h3>
+        
+        <!-- Display course progress -->
+        <div *ngIf="userProgress.length > 0">
+          <div *ngFor="let progress of userProgress">
+            <div *ngIf="progress.Id === course.id">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    
+    <!-- Display message when no courses are found -->
+    <ng-template #noCourses>
+      <p>You are not enrolled in any courses yet.</p>
+    </ng-template>
   </div>
-  
-  <ng-template #loading>
-    <p>Loading courses...</p>
-  </ng-template>
   

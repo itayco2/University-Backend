@@ -5,10 +5,10 @@ import { LessonModel } from '../../../models/lesson.model';
 import { LessonService } from '../../../services/lesson.service';
 import { NotifyService } from '../../../services/notify.service';
 import { ProgressService } from '../../../services/progress.service';
-import { UserStore } from '../../../storage/user-store';  // Import UserStore to get the user ID
+import { UserStore } from '../../../storage/user-store';
 import { ProgressModel } from '../../../models/progress.model';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { AuthService } from '../../../services/auth.service';  // Import the new AuthService
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-lesson-details',
@@ -18,11 +18,12 @@ import { AuthService } from '../../../services/auth.service';  // Import the new
 })
 export class LessonDetailsComponent implements OnInit {
 
-  public lesson: LessonModel | null = null;  // Initialize lesson as null
-  public userId: string = '';  // Store user ID
+  public lesson: LessonModel | null = null;
+  public userId: string = '';
   public canDeleteLesson: boolean = false; // Flag to determine if the user can delete the lesson
-  public userStore = inject(UserStore);  // Inject UserStore
-  private authService = inject(AuthService);  // Inject AuthService to check roles
+  public userStore = inject(UserStore);
+  private authService = inject(AuthService);
+  public isWatched: boolean = false;
 
   public constructor(
     private activatedRoute: ActivatedRoute,
@@ -31,7 +32,7 @@ export class LessonDetailsComponent implements OnInit {
     private notifyService: NotifyService,
     private progressService: ProgressService,
     private sanitizer: DomSanitizer
-  ) { }
+  ) {}
 
   public async ngOnInit() {
     try {
@@ -43,11 +44,13 @@ export class LessonDetailsComponent implements OnInit {
       // Get the user ID from the UserStore
       this.userId = this.userStore.user()?.id || '';  
 
-      // Get roles from the AuthService and check if the user can delete the lesson
-      const roles = this.authService.getUserRoles();
-      this.canDeleteLesson = roles.includes('Admin') || roles.includes('Professor');
-      console.log("roles" +roles);
-      
+      // Check if the user has 'Admin' or 'Professor' role
+      const roles = this.authService.getUserRoles(); // Get the roles
+      this.canDeleteLesson = roles.includes('Admin') || roles.includes('Professor'); // Check if any of the roles match
+
+      // Check if the lesson has been marked as watched by this user
+      const isWatched = localStorage.getItem(`lesson-watched-${id}`) === 'true';
+      this.isWatched = isWatched;
 
       // Handle the case when user ID is not available
       if (!this.userId) {
@@ -97,15 +100,25 @@ export class LessonDetailsComponent implements OnInit {
 
     try {
       if (this.userId) {
-        // Create a ProgressModel to track the user's progress
         const progress = new ProgressModel();
         progress.userId = this.userId;
         progress.lessonId = this.lesson.id;
-        progress.watchedAt = new Date();  // Set the watched date
+        progress.watchedAt = new Date();
 
-        // Call ProgressService to add progress
-        await this.progressService.addProgress(progress);
+        // Create progress
+        const createdProgress = await this.progressService.createProgress(progress).toPromise();
+        console.log('Progress created:', createdProgress);
+
+        // Save the watched status in localStorage
+        localStorage.setItem(`lesson-watched-${this.lesson.id}`, 'true');
+        
         this.notifyService.success('Lesson marked as watched!');
+
+        // Update the button visibility
+        this.isWatched = true;
+        
+        // Optionally, navigate to a different page
+        this.router.navigateByUrl('/courses');
       } else {
         this.notifyService.error('User ID is not available!');
       }

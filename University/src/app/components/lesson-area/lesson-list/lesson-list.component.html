@@ -9,12 +9,15 @@
                     <h3 class="lesson-title">{{l.title}}</h3>
                     <p class="lesson-description">{{l.videoUrl}}</p>
                 </div>
-                <button class="lesson-btn" 
-                        [routerLink]="['/lessons', l.id]" 
-                        routerLinkActive="active" 
-                        [routerLinkActiveOptions]="{ exact: true }">
-                    View Lesson
-                </button>
+                <button 
+                class="lesson-btn"
+                [routerLink]="['/lessons', l.id]" 
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                [disabled]="!isEnrolled(l)"
+                (click)="!isEnrolled(l)">
+                View Lesson
+            </button>
             </div>
         }
     </div>

@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { EnrollmentStore } from '../storage/enrollment-store';
 import { firstValueFrom } from 'rxjs';
-import { EnrollmentModel } from '../models/Enrollment.model';
 import { environment } from '../../environments/environment';
+import { EnrollmentModel } from '../models/enrollment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,18 @@ export class EnrollmentService {
 
     public async getEnrollmentsByUserId(userId: string): Promise<EnrollmentModel[]> {
         const dbEnrollment$ = this.http.get<EnrollmentModel[]>(`${environment.enrollmentUrl}/user/${userId}`);
+        return await firstValueFrom(dbEnrollment$);
+    }
+
+    public async userAlreadyEnrolled(userId: string, courseId: string): Promise<boolean> {
+        if (!userId || !courseId) {
+            throw new Error("Invalid user or course ID.");
+        }
+    
+        const dbEnrollment$ = this.http.get<boolean>(
+            `${environment.enrollmentUrl}/is-enrolled/${userId}/${courseId}`
+        );
+    
         return await firstValueFrom(dbEnrollment$);
     }
     

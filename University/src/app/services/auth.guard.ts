@@ -1,17 +1,17 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { NotifyService } from './notify.service';
-import * as jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state) => {
   const token = localStorage.getItem('token');
 
   if (token) {
     try {
-      const decodedToken: any = jwt_decode(token); 
+      const decodedToken: any = jwtDecode(token); 
       const userRole = decodedToken.role; 
 
-      const requiredRoles = route.data['roles'];
+      const requiredRoles = route.data['roles']; 
 
       if (requiredRoles && !requiredRoles.includes(userRole)) {
         const notifyService = inject(NotifyService);
@@ -20,7 +20,7 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state) =
         notifyService.error('You do not have permission to access this page.');
         router.navigateByUrl('/home');
 
-        return false;
+        return false; 
       }
 
       return true;
@@ -30,7 +30,7 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state) =
 
       notifyService.error('Error decoding the token');
       router.navigateByUrl('/login');
-      return false;
+      return false; 
     }
   }
 

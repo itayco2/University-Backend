@@ -34,6 +34,20 @@ public class EnrollmentController : ControllerBase
         }
     }
 
+    [HttpGet("api/enrollments/is-enrolled/{userId}/{courseId}")]
+    public async Task<IActionResult> IsUserEnrolled([FromRoute] Guid userId, [FromRoute] Guid courseId)
+    {
+        if (userId == Guid.Empty || courseId == Guid.Empty)
+        {
+            return BadRequest("Invalid user or course ID.");
+        }
+
+        bool isEnrolled = await _enrollmentService.IsUserAlreadyEnrolled(userId, courseId);
+        return Ok(isEnrolled);
+    }
+
+
+
 
 
 

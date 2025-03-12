@@ -22,7 +22,7 @@ export const ProgressStore = signalStore(
             patchState(store, _currentState => ({ progress: progress as ProgressModel[] })); // Type casting here
         },
 
-        addProgress(newProgress: ProgressModel): void {
+        createProgress(newProgress: ProgressModel): void {
             patchState(store, _currentState => ({
                 progress: [..._currentState.progress, newProgress] as ProgressModel[] // Type casting here
             }));
