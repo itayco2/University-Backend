@@ -16,16 +16,6 @@ export class ProgressService {
     return this.http.post<ProgressModel>(`${environment.progressUrl}`, progress);
   }
 
-  // Get progress by ID
-  getProgressById(id: string): Observable<ProgressModel> {
-    return this.http.get<ProgressModel>(`${environment.progressUrl}/${id}`);
-  }
-
-  // Get progress by user ID and progress ID
-  getProgressByUserIdAndProgressId(userId: string, progressId: string): Observable<ProgressModel> {
-    return this.http.get<ProgressModel>(`${environment.progressUrl}/${userId}/${progressId}`);
-  }
-
   getCourseProgress(userId: string, courseId: string): Observable<any> {
     return this.http.get<any>(`${environment.progressUrl}/user/${userId}/course/${courseId}/progress`).pipe(
         tap(response => {

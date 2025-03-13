@@ -16,21 +16,21 @@ import { AuthService } from '../../../services/auth.service'; // Add AuthService
 export class CourseDetailsComponent implements OnInit {
   public courseId: string = '';
   public lessons: LessonModel[] = [];
-  public canAddLesson: boolean = false; // Flag to control Add Lesson button visibility
+  public canAddLesson: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
     private lessonService: LessonService,
     private notifyService: NotifyService,
-    private authService: AuthService // Inject AuthService
+    private authService: AuthService 
   ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.courseId = params.get('courseId')!;
       this.getLessonsForCourse();
-      this.checkUserRole(); // Check if user has the correct role for adding lessons
+      this.checkUserRole(); 
     });
   }
 
@@ -43,9 +43,8 @@ export class CourseDetailsComponent implements OnInit {
     }
   }
 
-  // Check if the user has 'Admin' or 'Professor' role to show the "Add Lesson" button
   private checkUserRole(): void {
-    const roles = this.authService.getUserRoles(); // Get the user's roles
-    this.canAddLesson = roles.includes('Admin') || roles.includes('Professor'); // Show button if user has these roles
+    const roles = this.authService.getUserRoles(); 
+    this.canAddLesson = roles.includes('Admin') || roles.includes('Professor');
   }
 }

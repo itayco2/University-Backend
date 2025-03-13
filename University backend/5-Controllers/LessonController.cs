@@ -43,19 +43,6 @@ public class LessonController : ControllerBase
         return Created($"api/lessons/{dbLesson.Id}", dbLesson);
     }
 
-
-    [HttpPut("api/lessons/{id}")]
-    public async Task<IActionResult> UpdateFullLesson([FromRoute] Guid id, [FromBody] LessonDto lessonDto)
-    {
-        if (!ModelState.IsValid) return BadRequest(new ValidationError(ModelState.GetFirstError()));
-
-        lessonDto.Id = id;
-        LessonDto? dbLesson = await _lessonService.UpdateFullLesson(lessonDto);
-
-        if (dbLesson == null) return NotFound(new ResourceNotFound(id));
-        return Ok(dbLesson);
-    }
-
     [HttpDelete("api/lessons/{id}")]
     public async Task<IActionResult> DeleteLesson([FromRoute] Guid id)
     {

@@ -15,7 +15,7 @@
 
 .nav-link {
     text-decoration: none;
-    color: #5a5a5a;
+    color: white;
     font-size: 16px;
     font-weight: 500;
     transition: all 0.3s ease;
@@ -27,7 +27,7 @@
 }
 
 .nav-link:hover {
-    color: #0d6efd;
+    color: white;
     background-color: rgba(13, 110, 253, 0.05);
 }
 
@@ -37,7 +37,7 @@
 
 /* Active link styling */
 .nav-link.active {
-    color: #0d6efd;
+    color:wheat ;
     font-weight: 600;
     background-color: rgba(13, 110, 253, 0.1);
 }

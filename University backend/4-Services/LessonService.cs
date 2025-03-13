@@ -61,18 +61,6 @@ public class LessonService : IDisposable
         return _mapper.Map<LessonDto>(lesson);
     }
 
-    public async Task<LessonDto?> UpdateFullLesson(LessonDto lessonDto)
-    {
-        var dbLesson = await _db.Lessons.FindAsync(lessonDto.Id);
-        if (dbLesson == null) return null;
-
-        _mapper.Map(lessonDto, dbLesson);
-
-        await _db.SaveChangesAsync();
-
-        return _mapper.Map<LessonDto>(dbLesson);
-    }
-
     public async Task<bool> DeleteLesson(Guid id)
     {
         var dbLesson = await _db.Lessons.FindAsync(id);

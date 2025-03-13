@@ -4,30 +4,49 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
+  private cachedRoles: string[] | null = null;
 
   constructor() {}
 
-  // Get user roles from the JWT token
   getUserRoles(): string[] {
+    if (this.cachedRoles !== null) {
+      return this.cachedRoles;
+    }
+
     const token = localStorage.getItem('token');
     if (token) {
       try {
         const decodedToken = JSON.parse(atob(token.split('.')[1]));
         const roles = decodedToken?.user?.role;
-        return roles ? [roles] : []; 
+        this.cachedRoles = roles ? [roles] : [];
+        return this.cachedRoles;
       } catch (error) {
         console.error('Error decoding token:', error);
-        return []; 
+        this.cachedRoles = [];
+        return this.cachedRoles;
       }
     }
-    return [];
+    this.cachedRoles = [];
+    return this.cachedRoles;
   }
-  
 
-  // Check if the user has any of the required roles
   hasRole(requiredRoles: string[]): boolean {
     const roles = this.getUserRoles();
-    console.log('User roles:', roles);
+
     return requiredRoles.some(role => roles.includes(role));
+  }
+
+  clearRolesCache(): void {
+    this.cachedRoles = null;
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    this.clearRolesCache();
+  }
+
+  setToken(token: string): void {
+    localStorage.setItem('token', token);
+    this.clearRolesCache();
   }
 }

@@ -115,19 +115,19 @@
     font-weight: 500;
     font-size: 0.875rem;
     background-color: #e2e8f0;
-    color: #64748b;
+    color: black;
     cursor: not-allowed;
     border: none;
     border-radius: 0;
   }
   
   .lesson-btn {
-    background-color: #f1f5f9;
+    background-color: #36b06d;
     color: #334155;
   }
   
   .lesson-btn:hover {
-    background-color: #e2e8f0;
+    background-color: #a1a8a6;
   }
   
   .nav-link {

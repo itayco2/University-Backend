@@ -18,10 +18,6 @@ export const EnrollmentStore = signalStore(
 
     withMethods(store => ({
 
-        initEnrollment(enrollments: EnrollmentModel[]): void {
-            patchState(store, _currentState => ({ enrollments })); 
-        },
-
         addEnrollment(enrollment: EnrollmentModel): void{
             patchState(store,currentState => ({enrollments: [...currentState.enrollments,enrollment]}));
         }

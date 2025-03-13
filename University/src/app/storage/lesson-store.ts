@@ -27,17 +27,12 @@ export const LessonStore = signalStore(
             patchState(store,currentState => ({lessons: [...currentState.lessons,lesson]}));
         },
 
-        updateLesson(lesson: LessonModel): void{
-            patchState(store,currentState => ({lessons: currentState.lessons.map(l => l.id === lesson.id ? lesson : l)}));
-        },
-
         deleteLesson(id: string):void{
             patchState(store,currentState => ({lessons: currentState.lessons.filter(l => l.id !== id )}));
         }
    
     })),
     withComputed(store => ({
-        // Product count: 
         count: computed(() => store.lessons().length),
     })),
 

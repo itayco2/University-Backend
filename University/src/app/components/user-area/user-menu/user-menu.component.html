@@ -7,7 +7,11 @@
         </div>
 
         <!-- Dropdown Menu -->
+        <div>
+            <span (click)="toggleMenu()" class="clickable-text">Hello {{ userStore.user().name }}</span>
+        </div>
         <div *ngIf="menuOpen" class="dropdown-menu">
+          
             <div class="dropdown-option">
                 <a routerLink="/home" (click)="logMeOut()">Logout</a>
             </div>

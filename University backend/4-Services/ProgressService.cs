@@ -55,15 +55,6 @@ public class ProgressService : IDisposable
             .FirstOrDefaultAsync();
     }
 
-    public async Task<ProgressDto?> GetProgressByUserIdAndProgressIdAsync(Guid userId, Guid id)
-    {
-        return await _db.Progress
-            .AsNoTracking()
-            .Where(p => p.UserId == userId && p.Id == id)
-            .ProjectTo<ProgressDto>(_mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync();
-    }
-
 
     public async Task<bool> LessonExists(Guid lessonId)
     {

@@ -11,12 +11,6 @@ public class EnrollmentController : ControllerBase
     public EnrollmentController(EnrollmentService enrollmentService) => _enrollmentService = enrollmentService;
 
 
-    [HttpGet("api/enrollments")]
-    public async Task<IActionResult> GetAllEnrollmentsAsync()
-    {
-        List<EnrollmentDto> enrollments = await _enrollmentService.GetAllEnrollmentsAsync();
-        return Ok(enrollments);
-    }
 
     [HttpPost("api/enrollments")]
     public async Task<IActionResult> CreateEnrollmentAsync([FromForm] EnrollmentDto enrollmentDto)

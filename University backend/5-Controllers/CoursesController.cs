@@ -35,17 +35,6 @@ public class CoursesController : ControllerBase
     }
 
 
-    [HttpPut("api/courses/{id}")]
-    public async Task<IActionResult> UpdateFullCourseAsync([FromRoute] Guid id, [FromForm] CourseDto courseDto)
-    {
-        if (!ModelState.IsValid) return BadRequest(new ValidationError(ModelState.GetFirstError()));
-        courseDto.Id = id;
-        CourseDto? updatedCourseDto = await _courseService.UpdateFullCourseAsync(courseDto);
-        if (updatedCourseDto == null) return NotFound(new ResourceNotFound(id));
-        return Ok(updatedCourseDto);
-
-    }
-
     [HttpDelete("api/courses/{id}")]
     public async Task<IActionResult> DeleteCourseAsync([FromRoute] Guid id)
     {

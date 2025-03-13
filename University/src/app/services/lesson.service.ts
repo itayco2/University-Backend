@@ -30,7 +30,6 @@ public async getLessonsForCourse(courseId: string): Promise<LessonModel[]> {
     return dbLessons.filter(lesson => lesson.courseId === courseId);
 }
 
-  // Get a single lesson by ID (unchanged)
   public async getOneLesson(id: string): Promise<LessonModel> {
     const dbLesson = this.lessonStore.lessons().find(l => l.id === id);
     if (dbLesson) return dbLesson;
@@ -39,28 +38,17 @@ public async getLessonsForCourse(courseId: string): Promise<LessonModel[]> {
     return dbLessons;
   }
 
- // Add a new lesson
 public async addLesson(lesson: LessonModel): Promise<void> {
-    // Ensure you're sending the data as JSON and not FormData
     const dbLesson$ = this.http.post<LessonModel>(environment.lessonUrl, lesson, {
       headers: {
-        'Content-Type': 'application/json' // Make sure the content type is JSON
+        'Content-Type': 'application/json'
       }
     });
   
     const dbLesson = await firstValueFrom(dbLesson$);
     this.lessonStore.addLesson(dbLesson);
   }
-  
 
-  // Update an existing lesson (unchanged)
-  public async updateLesson(lesson: LessonModel): Promise<void> {
-    const dbLesson$ = this.http.put<LessonModel>(environment.lessonUrl, LessonModel.toFormData(lesson));
-    const dbLesson = await firstValueFrom(dbLesson$);
-    this.lessonStore.updateLesson(dbLesson);
-  }
-
-  // Delete a lesson (unchanged)
   public async deleteLesson(id: string): Promise<void> {
     const dbLesson$ = this.http.delete<LessonModel>(environment.lessonUrl + id);
     await firstValueFrom(dbLesson$);

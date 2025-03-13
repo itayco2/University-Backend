@@ -18,23 +18,6 @@ export const ProgressStore = signalStore(
     withState(initialState),
 
     withMethods(store => ({
-        initProgress(progress: ProgressModel[]): void {
-            patchState(store, _currentState => ({ progress: progress as ProgressModel[] })); // Type casting here
-        },
-
-        createProgress(newProgress: ProgressModel): void {
-            patchState(store, _currentState => ({
-                progress: [..._currentState.progress, newProgress] as ProgressModel[] // Type casting here
-            }));
-        },
-
-        updateProgress(updatedProgress: ProgressModel): void {
-            patchState(store, _currentState => ({
-                progress: _currentState.progress.map(p => 
-                    p.Id === updatedProgress.Id ? updatedProgress : p
-                ) as ProgressModel[] // Type casting here
-            }));
-        },
 
         clearProgress(): void {
             patchState(store, _ => ({ progress: [] as ProgressModel[] })); // Type casting here

@@ -43,14 +43,6 @@ namespace University_backend
             return Ok(progressDto);
         }
 
-        [HttpGet("api/progress/{userId}/{id}")]
-        public async Task<IActionResult> GetProgressByUserIdAndProgressIdAsync(Guid userId, Guid id)
-        {
-            ProgressDto? progressDto = await _progressService.GetProgressByUserIdAndProgressIdAsync(userId, id);
-            if (progressDto == null)
-                return NotFound(new ResourceNotFound(id));
-            return Ok(progressDto);
-        }
 
         [HttpGet("api/progress/user/{userId}/course/{courseId}/progress")]
         public async Task<IActionResult> GetCourseProgressAsync([FromRoute] Guid userId, [FromRoute] Guid courseId)

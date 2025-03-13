@@ -2,61 +2,37 @@
     <form [formGroup]="userForm" (submit)="send()">
 
         <mat-form-field appearance="outline">
-            <mat-label>Name: </mat-label>
+            <mat-label>Name:</mat-label>
             <input type="text" matInput formControlName="nameControl">
-            <mat-error *ngIf="userForm.get('nameControl').hasError('required')">
-                The Name field is required.
-            </mat-error>
-            <mat-error *ngIf="userForm.get('nameControl').hasError('maxlength')">
-                Name can't exceed 50 characters.
-            </mat-error>
-            <mat-error *ngIf="userForm.get('nameControl').hasError('minlength')">
-                Name can't be less than 2 characters.
+            <mat-error *ngIf="getFirstErrorMessage('nameControl')">
+                {{ getFirstErrorMessage('nameControl') }}
             </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-            <mat-label>Email: </mat-label>
+            <mat-label>Email:</mat-label>
             <input type="email" matInput formControlName="emailControl">
-            <mat-error *ngIf="userForm.get('emailControl').hasError('required')">
-                Email is required.
-            </mat-error>
-            <mat-error *ngIf="userForm.get('emailControl').hasError('minlength')">
-                Email must be minimum 2 characters long.
-            </mat-error>
-            <mat-error *ngIf="userForm.get('emailControl').hasError('maxlength')">
-                Email can't exceed 100 characters.
-            </mat-error>
-            <mat-error *ngIf="userForm.get('emailControl').hasError('pattern')">
-                Invalid Email.
+            <mat-error *ngIf="getFirstErrorMessage('emailControl')">
+                {{ getFirstErrorMessage('emailControl') }}
             </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-            <mat-label>Password: </mat-label>
+            <mat-label>Password:</mat-label>
             <input type="password" matInput formControlName="passwordControl">
-            <mat-error *ngIf="userForm.get('passwordControl').hasError('required')">
-                Password is required.
-            </mat-error>
-            <mat-error *ngIf="userForm.get('passwordControl').hasError('minlength')">
-                Password must be at least 8 characters long.
-            </mat-error>
-            <mat-error *ngIf="userForm.get('passwordControl').hasError('maxlength')">
-                Password can't exceed 100 characters.
-            </mat-error>
-            <mat-error *ngIf="userForm.get('passwordControl').hasError('pattern')">
-                Password must contain at least one uppercase letter, one digit, and one special character.
+            <mat-error *ngIf="getFirstErrorMessage('passwordControl')">
+                {{ getFirstErrorMessage('passwordControl') }}
             </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-            <mat-label>Role: </mat-label>
+            <mat-label>Role:</mat-label>
             <mat-select formControlName="roleControl">
                 <mat-option [value]="1">Student</mat-option>
                 <mat-option [value]="2">Professor</mat-option>
             </mat-select>
-            <mat-error *ngIf="userForm.get('roleControl').hasError('required')">
-                Missing Role.
+            <mat-error *ngIf="getFirstErrorMessage('roleControl')">
+                {{ getFirstErrorMessage('roleControl') }}
             </mat-error>
         </mat-form-field>
 

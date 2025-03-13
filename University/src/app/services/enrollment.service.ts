@@ -14,14 +14,6 @@ export class EnrollmentService {
     private enrollmentStore = inject(EnrollmentStore);
 
 
-    public async getAllEnrollments(): Promise<EnrollmentModel[]>{
-        if(this.enrollmentStore.count()) return this.enrollmentStore.enrollments();
-        const dbEnrollment$ = this.http.get<EnrollmentModel[]>(environment.enrollmentUrl);
-        const dbEnrollment = await firstValueFrom(dbEnrollment$);
-        this.enrollmentStore.initEnrollment(dbEnrollment);
-        return dbEnrollment;
-    }
-
     public async addEnrollment(enrollment : EnrollmentModel): Promise<void>{
         const dbEnrollment$ = this.http.post<EnrollmentModel>(environment.enrollmentUrl, EnrollmentModel.toFormData(enrollment));
         const dbEnrollment = await firstValueFrom(dbEnrollment$);

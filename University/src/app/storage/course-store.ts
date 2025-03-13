@@ -27,10 +27,6 @@ export const CourseStore = signalStore(
             patchState(store,currentState => ({courses: [...currentState.courses,course]}));
         },
 
-        updateCourse(course: CourseModel): void{
-            patchState(store,currentState => ({courses: currentState.courses.map(c => c.id === course.id ? course : c)}));
-        },
-
          // Delete existing product from global state: 
            deleteCourse(id: string): void {
              patchState(store, currentState => ({ courses: currentState.courses.filter(c => c.id !== id) })); // Duplicate products but without the deleted one.

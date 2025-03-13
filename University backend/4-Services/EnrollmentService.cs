@@ -42,17 +42,6 @@ namespace University_backend
         }
 
 
-        public async Task<List<EnrollmentDto>> GetAllEnrollmentsAsync()
-        {
-            List<EnrollmentDto> enrollmentDtos = await _db.Enrollments
-                .AsNoTracking()
-                .ProjectTo<EnrollmentDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
-
-            return enrollmentDtos;
-        }
-
-
         public async Task<EnrollmentDto> CreateEnrollmentAsync(EnrollmentDto enrollmentDto)
         {
             Enrollment enrollment = _mapper.Map<Enrollment>(enrollmentDto);

@@ -1,33 +1,24 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/page-area/home/home.component';
-import { ContactUsComponent } from './components/page-area/contact-us/contact-us.component';
-import { Page404Component } from './components/page-area/page-404/page-404.component';
-import { CourseListComponent } from './components/course-area/course-list/course-list.component';
-import { AddCourseComponent } from './components/course-area/add-course/add-course.component';
 import { authGuard } from './services/auth.guard';
-import { LessonListComponent } from './components/lesson-area/lesson-list/lesson-list.component';
-import { CourseDetailsComponent } from './components/course-area/course-details/course-details.component';
-import { ProgressComponent } from './components/progress-area/progress/progress.component';
-import { LessonDetailsComponent } from './components/lesson-area/lesson-details/lesson-details.component';
-import { AddLessonComponent } from './components/lesson-area/add-lesson/add-lesson.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "/home", pathMatch:"full" },
     { path: "home", component: HomeComponent},
-    { path: "contact-us", component: ContactUsComponent},
-    { path: "courses", component: CourseListComponent,  canActivate:[authGuard]},
-    { path: "course/new", component: AddCourseComponent, canActivate:[authGuard], data : {roles: ['Admin', 'Professor']} },
-    { path: 'course-details/:courseId/lessons', component: CourseDetailsComponent, canActivate:[authGuard] },
-    { path: "lessons/:id", component: LessonListComponent ,canActivate:[authGuard]},
-    { path: "lesson-details/:id", component: LessonDetailsComponent, canActivate:[authGuard]},
-    { path: "lesson/new/:id", component: AddLessonComponent, canActivate:[authGuard], data : {roles: ['Admin', 'Professor']} },
-    { path: "progress/:id", component: ProgressComponent , canActivate:[authGuard]},
+    { path: "contact-us", loadComponent: () => import("./components/page-area/contact-us/contact-us.component").then(c => c.ContactUsComponent) },
+    { path: "courses", loadComponent: () => import("./components/course-area/course-list/course-list.component").then(c => c.CourseListComponent),  canActivate:[authGuard]},
+    { path: "course/new", loadComponent: () => import("./components/course-area/add-course/add-course.component").then(c => c.AddCourseComponent), canActivate:[authGuard], data : {roles: ['Admin', 'Professor']} },
+    { path: 'course-details/:courseId/lessons', loadComponent: () => import("./components/course-area/course-details/course-details.component").then(c => c.CourseDetailsComponent), canActivate:[authGuard] },
+    { path: "lessons/:id",loadComponent: () => import("./components/lesson-area/lesson-list/lesson-list.component").then(l => l.LessonListComponent) ,canActivate:[authGuard]},
+    { path: "lesson-details/:id", loadComponent: () => import("./components/lesson-area/lesson-details/lesson-details.component").then(l => l.LessonDetailsComponent), canActivate:[authGuard]},
+    { path: "lesson/new/:id", loadComponent: () => import("./components/lesson-area/add-lesson/add-lesson.component").then(l => l.AddLessonComponent), canActivate:[authGuard], data : {roles: ['Admin', 'Professor']} },
+    { path: "progress/:id", loadComponent: () => import("./components/progress-area/progress/progress.component").then(p => p.ProgressComponent) , canActivate:[authGuard]},
     { path: "register", loadComponent: () => import("./components/user-area/register/register.component").then(m => m.RegisterComponent) }, 
     { path: "login", loadComponent: () => import("./components/user-area/login/login.component").then(m => m.LoginComponent) }, 
 
 
 
-    { path: "**", component: Page404Component }
+    { path: "**", loadComponent: () => import("./components/page-area/page-404/page-404.component").then(m => m.Page404Component) }
 
 
 ];

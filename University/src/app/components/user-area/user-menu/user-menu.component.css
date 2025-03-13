@@ -62,4 +62,10 @@
   body {
     overflow: hidden; /* Optional: Prevent body scrolling when dropdown is open */
   }
-  
+  .clickable-text {
+    cursor: pointer;
+}
+a {
+    color: black;
+    text-decoration: none;
+}

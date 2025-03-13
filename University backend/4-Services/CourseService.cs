@@ -47,18 +47,6 @@ namespace University_backend
             return _mapper.Map<CourseDto>(course);
         }
 
-        public async Task<CourseDto?> UpdateFullCourseAsync(CourseDto courseDto)
-        {
-            var dbCourse = await _db.Courses.FindAsync(courseDto.Id);
-            if (dbCourse == null) return null;
-
-            _mapper.Map(courseDto, dbCourse);
-
-            await _db.SaveChangesAsync();
-
-            return _mapper.Map<CourseDto>(dbCourse);
-        }
-
         public async Task<bool> DeleteCourseAsync(Guid id)
         {
             var dbCourse = await _db.Courses.FindAsync(id);
